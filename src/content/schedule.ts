@@ -1,0 +1,81 @@
+import type { ScheduleItem } from '../types/content';
+
+// Placeholder schedule for one day. The team sets the real agenda later.
+export const schedule: ScheduleItem[] = [
+  {
+    id: 'check-in',
+    startsAt: '2099-04-18T09:00:00-04:00',
+    endsAt: '2099-04-18T09:30:00-04:00',
+    title: 'Check-in and coffee',
+    location: 'Main Lobby',
+  },
+  {
+    id: 'opening-remarks',
+    startsAt: '2099-04-18T09:30:00-04:00',
+    endsAt: '2099-04-18T10:00:00-04:00',
+    title: 'Opening remarks',
+    location: 'Auditorium',
+  },
+  {
+    id: 'keynote-address',
+    startsAt: '2099-04-18T10:00:00-04:00',
+    endsAt: '2099-04-18T10:45:00-04:00',
+    title: 'Keynote address',
+    description: 'A keynote speaker opens the day.',
+    location: 'Auditorium',
+  },
+  {
+    id: 'morning-break',
+    startsAt: '2099-04-18T10:45:00-04:00',
+    endsAt: '2099-04-18T11:00:00-04:00',
+    title: 'Morning break',
+    location: 'Auditorium Foyer',
+  },
+  {
+    id: 'panel-government-defense',
+    startsAt: '2099-04-18T11:00:00-04:00',
+    endsAt: '2099-04-18T12:00:00-04:00',
+    title: 'Panel: Government and defense partnerships',
+    description: 'Sponsors from government and defense talk about joint projects.',
+    location: 'Room 101',
+    track: 'Track A',
+  },
+  {
+    id: 'panel-ai-nonprofit',
+    startsAt: '2099-04-18T11:00:00-04:00',
+    endsAt: '2099-04-18T12:00:00-04:00',
+    title: 'Panel: AI research in the nonprofit sector',
+    description: 'Researchers and nonprofit leaders discuss applied AI work.',
+    location: 'Room 102',
+    track: 'Track B',
+  },
+  {
+    id: 'lunch',
+    startsAt: '2099-04-18T12:00:00-04:00',
+    endsAt: '2099-04-18T13:00:00-04:00',
+    title: 'Lunch',
+    location: 'Dining Hall',
+  },
+  {
+    id: 'sponsor-showcase',
+    startsAt: '2099-04-18T13:00:00-04:00',
+    endsAt: '2099-04-18T14:00:00-04:00',
+    title: 'Sponsor showcase',
+    description: 'Sponsors set up tables and meet students.',
+    location: 'Exhibit Hall',
+  },
+  {
+    id: 'afternoon-break',
+    startsAt: '2099-04-18T14:00:00-04:00',
+    endsAt: '2099-04-18T14:15:00-04:00',
+    title: 'Afternoon break',
+    location: 'Exhibit Hall',
+  },
+  {
+    id: 'closing-remarks',
+    startsAt: '2099-04-18T14:15:00-04:00',
+    endsAt: '2099-04-18T15:00:00-04:00',
+    title: 'Closing remarks and awards',
+    location: 'Auditorium',
+  },
+];
