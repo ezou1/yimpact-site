@@ -1,4 +1,5 @@
 import type { Sponsor } from '../types/content';
+import { asset } from '../lib/asset';
 
 interface SponsorLogoGridProps {
   sponsors: Sponsor[];
@@ -12,7 +13,7 @@ export function SponsorLogoGrid({ sponsors }: SponsorLogoGridProps) {
       {sponsors.map((sponsor) => {
         const logo = (
           <img
-            src={sponsor.logoUrl}
+            src={asset(sponsor.logoUrl)}
             alt={sponsor.name}
             width={48}
             height={48}

@@ -6,6 +6,7 @@ import { buttonClassNames } from '../components/ui/Button';
 import { domainLabels } from '../content/sponsors';
 import { postsByDate } from '../content/blog';
 import { useSponsors } from '../admin/sponsorStore';
+import { asset } from '../lib/asset';
 import { NotFound } from './NotFound';
 import type { SponsorTier } from '../types/content';
 
@@ -48,7 +49,7 @@ export function SponsorDetail() {
 
           <div className="mt-6 flex flex-wrap items-center gap-6 border-b border-bar/25 pb-8">
             <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full border border-bar/25 bg-white">
-              <img src={sponsor.logoUrl} alt={sponsor.name} className="h-1/2 w-1/2 object-contain" />
+              <img src={asset(sponsor.logoUrl)} alt={sponsor.name} className="h-1/2 w-1/2 object-contain" />
             </div>
             <div className="min-w-0">
               <p className="label text-ink-400">{tierLabel[sponsor.tier]}</p>

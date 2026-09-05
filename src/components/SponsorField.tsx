@@ -2,6 +2,7 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } fr
 import { Link } from 'react-router-dom';
 import type { Domain } from '../types/content';
 import { domainLabels, domainOrder } from '../content/sponsors';
+import { asset } from '../lib/asset';
 
 export interface FieldItem {
   id: string;
@@ -441,7 +442,7 @@ export function SponsorField({
         {ordered.map((item, index) => {
           const inner = (
             <img
-              src={item.logoUrl}
+              src={asset(item.logoUrl)}
               alt={item.isFiller ? '' : item.name}
               aria-hidden={item.isFiller || undefined}
               className="h-1/2 w-1/2 object-contain"

@@ -15,7 +15,7 @@ import { NotFound } from './pages/NotFound';
 export function App() {
   return (
     <AdminProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />

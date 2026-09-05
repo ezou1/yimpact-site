@@ -1,3 +1,5 @@
+import { asset } from '../lib/asset';
+
 export interface Member {
   id: string;
   name: string;
@@ -29,7 +31,7 @@ export function MemberChip({ member, isOpen, onToggle, panelId }: MemberChipProp
       }`}
     >
       <img
-        src={member.headshotUrl}
+        src={asset(member.headshotUrl)}
         alt=""
         aria-hidden="true"
         width={200}
@@ -61,7 +63,7 @@ export function MemberPanel({ member, id, compact = false }: MemberPanelProps) {
     <div id={id} className="haze-inner mt-4 border border-bar bg-white/70">
       <div className={`flex flex-col gap-4 p-5 ${compact ? '' : 'sm:flex-row sm:items-start'}`}>
         <img
-          src={member.headshotUrl}
+          src={asset(member.headshotUrl)}
           alt={member.name}
           width={96}
           height={96}
