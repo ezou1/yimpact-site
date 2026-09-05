@@ -25,7 +25,8 @@ export function Students() {
         meta="Open to every Yale student, in every school and every year. No team required, no prototype required, no prior connection to a lab or a firm required. Free to take part."
       />
 
-      <div className="mx-auto max-w-[1200px] px-6 pb-20 md:px-10">
+      <div className="mx-auto max-w-[1200px] px-4 pb-8 sm:px-6 md:px-10">
+        <div className="haze px-5 py-8 sm:px-7 md:px-10 md:py-12">
         <Reveal>
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:gap-10">
             <div>
@@ -53,16 +54,16 @@ export function Students() {
           </div>
         </Reveal>
 
-        <section id="the-semester" className="mt-16 border-t border-ink-100 pt-8" aria-labelledby="semester-heading">
+        <section id="the-semester" className="mt-16 border-t border-bar/25 pt-8" aria-labelledby="semester-heading">
           <Reveal>
             <h2 id="semester-heading" className="display-2">
               The semester, week by week
             </h2>
-            <ol className="mt-6 border-t border-ink-100">
+            <ol className="mt-6 border-t border-bar/25">
               {studentSteps.map((step, index) => (
                 <li
                   key={step.id}
-                  className="grid gap-1 border-b border-ink-100 py-4 sm:grid-cols-[40px_180px_120px_minmax(0,1fr)] sm:gap-6"
+                  className="grid gap-1 border-b border-bar/25 py-4 sm:grid-cols-[40px_180px_120px_minmax(0,1fr)] sm:gap-6"
                 >
                   <span className="label text-ink-300">{String(index + 1).padStart(2, '0')}</span>
                   <span className="text-base leading-[1.35] tracking-[-0.025em] text-ink-900">{step.name}</span>
@@ -74,7 +75,7 @@ export function Students() {
           </Reveal>
         </section>
 
-        <section className="mt-16 border-t border-ink-100 pt-8" aria-labelledby="tracks-heading">
+        <section className="mt-16 border-t border-bar/25 pt-8" aria-labelledby="tracks-heading">
           <Reveal>
             <h2 id="tracks-heading" className="display-2">
               Pick a track
@@ -83,7 +84,7 @@ export function Students() {
               Tracks are organizing tools, not boundaries. Projects do not need to be technical — a policy memo, a
               bias study, a nonprofit proposal, and a working prototype are judged against the same standard.
             </p>
-            <ul className="mt-6 grid gap-px border border-ink-100 bg-ink-100 sm:grid-cols-2 lg:grid-cols-4">
+            <ul className="haze-inner mt-6 grid gap-px overflow-hidden border border-bar/25 bg-bar/25 sm:grid-cols-2 lg:grid-cols-4">
               {tracks.map((track) => (
                 <li key={track.id} className="bg-white p-4">
                   <h3 className="text-sm font-medium leading-[1.3] tracking-[-0.028em] text-ink-900">{track.name}</h3>
@@ -94,7 +95,7 @@ export function Students() {
           </Reveal>
         </section>
 
-        <section className="mt-16 border-t border-ink-100 pt-8" aria-labelledby="leave-with-heading">
+        <section className="mt-16 border-t border-bar/25 pt-8" aria-labelledby="leave-with-heading">
           <Reveal>
             <h2 id="leave-with-heading" className="display-2">
               How good work keeps going
@@ -104,7 +105,7 @@ export function Students() {
               a consequence, which we are glad about — but every one of them is judged on whether the work reaches
               the people it was built for.
             </p>
-            <ul className="mt-6 grid gap-px border border-ink-100 bg-ink-100 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="haze-inner mt-6 grid gap-px overflow-hidden border border-bar/25 bg-bar/25 sm:grid-cols-2 lg:grid-cols-3">
               {pathways.map((pathway) => (
                 <li key={pathway.id} className="bg-white p-4">
                   <h3 className="text-sm font-medium leading-[1.3] tracking-[-0.028em] text-ink-900">
@@ -120,6 +121,7 @@ export function Students() {
             </p>
           </Reveal>
         </section>
+        </div>
       </div>
     </Layout>
   );

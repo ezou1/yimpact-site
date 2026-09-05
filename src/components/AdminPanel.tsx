@@ -15,7 +15,7 @@ export function AdminPanel({ officers, openId, onToggle }: AdminPanelProps) {
 
   return (
     <aside aria-labelledby="admin-panel-heading">
-      <div className="border-b border-ink-100 pb-3">
+      <div className="border-b border-bar/25 pb-3">
         <h2 id="admin-panel-heading" className="display-2">
           Admin
         </h2>

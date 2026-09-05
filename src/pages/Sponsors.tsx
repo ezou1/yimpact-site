@@ -75,9 +75,10 @@ export function Sponsors() {
         meta="Organizations who back student work aimed at public benefit. Each domain holds its own partners below it; the larger a bubble sits, the deeper that organization's commitment to the programme runs."
       />
 
-      <div className="mx-auto max-w-[1200px] px-6 pb-20 md:px-10">
+      <div className="mx-auto max-w-[1200px] px-4 pb-8 sm:px-6 md:px-10">
+        <div className="haze px-5 py-8 sm:px-7 md:px-10 md:py-12">
         {isAdmin ? (
-          <div className="mb-6 flex flex-wrap items-center justify-between gap-4 border border-ink-100 bg-ink-50 px-4 py-3">
+          <div className="haze-inner mb-6 flex flex-wrap items-center justify-between gap-4 border border-bar/25 bg-ink-50/70 px-4 py-3">
             <p className="label text-ink-500">
               {isPlacing
                 ? 'Drop the bubble where the partner belongs — the column sets the domain, the height sets the size range. Escape to cancel.'
@@ -90,8 +91,8 @@ export function Sponsors() {
               aria-pressed={isPlacing}
               className={`label flex shrink-0 items-center gap-2 border px-4 py-2.5 transition-colors duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 ${
                 isPlacing
-                  ? 'border-ink-300 text-ink-900 hover:border-ink-900'
-                  : 'border-ink-900 bg-ink-900 text-white hover:bg-blue-700'
+                  ? 'border-bar/45 text-ink-900 hover:border-bar'
+                  : 'border-bar bg-ink-900 text-white hover:bg-blue-700'
               }`}
             >
               {isPlacing ? (
@@ -115,11 +116,11 @@ export function Sponsors() {
           previewDomain={placement?.domain ?? null}
         />
 
-        <p className="label mt-8 border-t border-ink-100 pt-4 text-ink-300">
+        <p className="label mt-8 border-t border-bar/25 pt-4 text-ink-300">
           Outlined bubbles are placeholders. They give way as partners are confirmed.
         </p>
 
-        <div className="mt-14 border-t border-ink-100 pt-8">
+        <div className="mt-14 border-t border-bar/25 pt-8">
           <h2 className="display-2 max-w-[20ch]">
             Your organization belongs in this <span className="accent-serif">field</span>
           </h2>
@@ -130,6 +131,7 @@ export function Sponsors() {
           <a href={`mailto:${event.sponsorEmail}`} className={`${buttonClassNames('primary')} mt-6`}>
             {event.sponsorEmail}
           </a>
+        </div>
         </div>
       </div>
 

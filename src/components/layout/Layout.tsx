@@ -54,14 +54,13 @@ export function Layout({ title, description, pattern, children }: LayoutProps) {
 
   return (
     <div className="relative flex min-h-screen flex-col bg-white">
-      {pattern === 'home' ? (
+      {/* The motif is pinned to the viewport and fades toward the foot of the
+          screen. It holds still while the panels slide over it. */}
+      {pattern !== 'none' ? (
         <div
           aria-hidden="true"
-          className={`${patternClass.home} pattern-fade pointer-events-none absolute inset-x-0 top-0 h-[1040px]`}
+          className={`${patternClass[pattern]} pattern-fade pointer-events-none fixed inset-0 z-0`}
         />
-      ) : null}
-      {pattern !== 'home' && pattern !== 'none' ? (
-        <div aria-hidden="true" className={`${patternClass[pattern]} pointer-events-none absolute inset-0`} />
       ) : null}
 
       <a
@@ -71,7 +70,7 @@ export function Layout({ title, description, pattern, children }: LayoutProps) {
         Skip to content
       </a>
       <Header />
-      <main id="main-content" className="relative flex-1">
+      <main id="main-content" className="relative z-10 flex-1">
         {children}
       </main>
       <Footer contactEmail={event.contactEmail} sponsorEmail={event.sponsorEmail} />

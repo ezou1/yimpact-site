@@ -24,8 +24,8 @@ export function MemberChip({ member, isOpen, onToggle, panelId }: MemberChipProp
       onClick={onToggle}
       aria-expanded={isOpen}
       aria-controls={panelId}
-      className={`group flex w-[200px] flex-col border text-left transition-colors duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 ${
-        isOpen ? 'border-ink-900' : 'border-ink-100 hover:border-ink-300'
+      className={`haze-inner group flex w-[200px] flex-col overflow-hidden border text-left transition-colors duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 ${
+        isOpen ? 'border-bar' : 'border-bar/25 hover:border-bar/45'
       }`}
     >
       <img
@@ -38,7 +38,7 @@ export function MemberChip({ member, isOpen, onToggle, panelId }: MemberChipProp
           isOpen ? 'grayscale-0' : 'grayscale group-hover:grayscale-0'
         }`}
       />
-      <span className="block border-t border-ink-100 px-3 py-3">
+      <span className="block border-t border-bar/25 px-3 py-3">
         <span className="block truncate text-sm font-medium leading-[1.25] tracking-[-0.03em] text-ink-900">
           {member.name}
         </span>
@@ -58,14 +58,14 @@ interface MemberPanelProps {
 // stays symmetric no matter which tile is selected.
 export function MemberPanel({ member, id, compact = false }: MemberPanelProps) {
   return (
-    <div id={id} className="mt-4 border border-ink-900 bg-white">
+    <div id={id} className="haze-inner mt-4 border border-bar bg-white/70">
       <div className={`flex flex-col gap-4 p-5 ${compact ? '' : 'sm:flex-row sm:items-start'}`}>
         <img
           src={member.headshotUrl}
           alt={member.name}
           width={96}
           height={96}
-          className="h-24 w-24 shrink-0 bg-ink-50 object-cover"
+          className="haze-inner h-24 w-24 shrink-0 bg-ink-50 object-cover"
         />
         <div className="min-w-0 flex-1">
           <h3 className="display-3">{member.name}</h3>
@@ -74,7 +74,7 @@ export function MemberPanel({ member, id, compact = false }: MemberPanelProps) {
           <p className="mt-3 max-w-[68ch] text-sm leading-[1.65] text-ink-700">{member.bio}</p>
           <a
             href={`mailto:${member.email}`}
-            className="label mt-4 inline-flex items-center border border-ink-300 px-4 py-2.5 text-ink-900 transition-colors duration-300 ease-out hover:border-ink-900 hover:bg-ink-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+            className="label mt-4 inline-flex items-center border border-bar/45 px-4 py-2.5 text-ink-900 transition-colors duration-300 ease-out hover:border-bar hover:bg-ink-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
           >
             Contact me
           </a>

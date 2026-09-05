@@ -17,8 +17,9 @@ export function Footer({ contactEmail, sponsorEmail }: FooterProps) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-ink-100 bg-white">
-      <div className="mx-auto max-w-[1200px] px-6 py-10 md:px-10">
+    <footer className="relative z-10">
+      <div className="mx-auto max-w-[1200px] px-4 py-2 pb-6 sm:px-6 md:px-10 md:py-3 md:pb-10">
+        <div className="haze px-5 py-8 sm:px-7 md:px-10 md:py-10">
         <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_auto]">
           <div>
             <p className="display-2 max-w-[14ch]">
@@ -44,7 +45,7 @@ export function Footer({ contactEmail, sponsorEmail }: FooterProps) {
           </nav>
         </div>
 
-        <div className="mt-10 flex flex-col gap-2 border-t border-ink-100 pt-5 md:flex-row md:items-center md:justify-between">
+        <div className="mt-10 flex flex-col gap-2 border-t border-bar/25 pt-5 md:flex-row md:items-center md:justify-between">
           <p className="label text-ink-400">© {year} Yale Impact Expo</p>
           <div className="flex flex-wrap gap-x-6 gap-y-1">
             <a
@@ -60,6 +61,7 @@ export function Footer({ contactEmail, sponsorEmail }: FooterProps) {
               Partner with us
             </a>
           </div>
+        </div>
         </div>
       </div>
     </footer>

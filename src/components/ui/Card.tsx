@@ -10,7 +10,7 @@ interface CardProps {
 export function Card({ children, className = '' }: CardProps) {
   return (
     <div
-      className={`border border-ink-100 bg-white p-5 transition-colors duration-300 ease-out hover:border-ink-300 ${className}`}
+      className={`haze-inner border border-bar/25 bg-white/70 p-5 transition-colors duration-300 ease-out hover:border-bar/45 ${className}`}
     >
       {children}
     </div>

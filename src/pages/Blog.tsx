@@ -27,8 +27,8 @@ export function Blog() {
       description="The Impact Record: reporting from the Yale Impact Expo on the programme, its partners, its research, and its work in New Haven."
     >
       {/* The masthead. A newspaper nameplate, straightened out. */}
-      <div className="border-b border-ink-100">
-        <div className="mx-auto flex max-w-[1200px] flex-wrap items-baseline justify-between gap-x-8 gap-y-2 px-6 py-8 md:px-10 md:py-10">
+      <div className="mx-auto max-w-[1200px] px-4 py-2 sm:px-6 md:px-10 md:py-3">
+        <div className="haze flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 px-5 py-8 sm:px-7 md:px-10 md:py-10">
           <h1 className="display-2">
             The Impact <span className="accent-serif">Record</span>
           </h1>
@@ -37,8 +37,8 @@ export function Blog() {
       </div>
 
       {/* The section rail. */}
-      <div className="sticky top-[var(--header-h)] z-30 border-b border-ink-100 bg-white/90 backdrop-blur-md">
-        <div className="mx-auto max-w-[1200px] px-6 md:px-10">
+      <div className="sticky top-[var(--header-h)] z-30 mx-auto max-w-[1200px] px-4 py-2 sm:px-6 md:px-10">
+        <div className="haze overflow-hidden px-2">
           <div
             role="group"
             aria-label="Filter stories by section"
@@ -57,8 +57,8 @@ export function Blog() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-[1200px] px-6 py-10 md:px-10">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_260px] lg:gap-12">
+      <div className="mx-auto max-w-[1200px] px-4 py-2 sm:px-6 md:px-10 md:py-3">
+        <div className="haze grid gap-10 px-5 py-8 sm:px-7 md:px-10 md:py-12 lg:grid-cols-[minmax(0,1fr)_260px] lg:gap-12">
           <div>
             {lead ? (
               <Reveal>
@@ -101,7 +101,7 @@ function SectionTab({ label, active, onClick }: SectionTabProps) {
       aria-pressed={active}
       onClick={onClick}
       className={`label shrink-0 border-b-2 px-4 py-3 transition-colors duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-blue-500 ${
-        active ? 'border-ink-900 text-ink-900' : 'border-transparent text-ink-400 hover:text-ink-900'
+        active ? 'border-bar text-ink-900' : 'border-transparent text-ink-400 hover:text-ink-900'
       }`}
     >
       {label}

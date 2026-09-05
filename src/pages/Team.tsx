@@ -36,7 +36,8 @@ export function Team() {
       title="Team · Yale Impact Expo"
       description="The students who run the Yale Impact Expo, and the officers of the organization behind it."
     >
-      <div className="mx-auto max-w-[1200px] px-6 py-12 md:px-10 md:py-16">
+      <div className="mx-auto max-w-[1200px] px-4 py-6 sm:px-6 md:px-10 md:py-10">
+        <div className="haze px-5 py-8 sm:px-7 md:px-10 md:py-12">
         <Reveal>
           <h1 className="display-2">
             The Impact Expo <span className="accent-serif">Team</span>
@@ -47,7 +48,7 @@ export function Team() {
           <AdminPanel officers={adminOfficers} openId={openId} onToggle={toggle} />
 
           <div>
-            <div className="border-b border-ink-100 pb-3">
+            <div className="border-b border-bar/25 pb-3">
               <h2 className="display-2">Expo team</h2>
             </div>
 
@@ -84,6 +85,7 @@ export function Team() {
               })}
             </div>
           </div>
+        </div>
         </div>
       </div>
     </Layout>

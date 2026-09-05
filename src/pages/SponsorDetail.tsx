@@ -32,7 +32,8 @@ export function SponsorDetail() {
       title={`${sponsor.name} · Yale Impact Expo`}
       description={sponsor.blurb ?? `${sponsor.name} is a partner of the Yale Impact Expo.`}
     >
-      <div className="mx-auto max-w-[1200px] px-6 py-10 md:px-10 md:py-12">
+      <div className="mx-auto max-w-[1200px] px-4 py-6 sm:px-6 md:px-10 md:py-10">
+        <div className="haze px-5 py-8 sm:px-7 md:px-10 md:py-12">
         <Reveal>
           <p className="label text-ink-400">
             <Link
@@ -45,8 +46,8 @@ export function SponsorDetail() {
             <span className="text-blue-500">{domainLabels[sponsor.domain]}</span>
           </p>
 
-          <div className="mt-6 flex flex-wrap items-center gap-6 border-b border-ink-100 pb-8">
-            <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full border border-ink-100 bg-white">
+          <div className="mt-6 flex flex-wrap items-center gap-6 border-b border-bar/25 pb-8">
+            <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full border border-bar/25 bg-white">
               <img src={sponsor.logoUrl} alt={sponsor.name} className="h-1/2 w-1/2 object-contain" />
             </div>
             <div className="min-w-0">
@@ -73,7 +74,7 @@ export function SponsorDetail() {
           )}
         </Reveal>
 
-        <section className="mt-14 border-t border-ink-100 pt-8" aria-labelledby="sponsor-stories-heading">
+        <section className="mt-14 border-t border-bar/25 pt-8" aria-labelledby="sponsor-stories-heading">
           <h2 id="sponsor-stories-heading" className="display-2">
             From The Impact <span className="accent-serif">Record</span>
           </h2>
@@ -90,7 +91,7 @@ export function SponsorDetail() {
               ))}
             </ul>
           ) : (
-            <div className="mt-8 border border-ink-100 bg-ink-50 px-6 py-10 text-center">
+            <div className="haze-inner mt-8 border border-bar/25 bg-ink-50/70 px-6 py-10 text-center">
               <p className="mx-auto max-w-[44ch] text-sm leading-[1.6] text-ink-500">
                 Nothing published about this partner yet. Their first story appears here once the newsroom covers their
                 work with a team.
@@ -98,6 +99,7 @@ export function SponsorDetail() {
             </div>
           )}
         </section>
+        </div>
       </div>
     </Layout>
   );

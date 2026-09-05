@@ -37,9 +37,10 @@ export function Login() {
         meta="The portal carries team submissions, mentor matching, judging assignments, and partner office-hour booking. It opens closer to the Expo."
       />
 
-      <div className="mx-auto max-w-[1200px] px-6 pb-24 md:px-10">
+      <div className="mx-auto max-w-[1200px] px-4 pb-8 sm:px-6 md:px-10">
+        <div className="haze px-5 py-8 sm:px-7 md:px-10 md:py-12">
         <Reveal>
-          <div className="grid grid-cols-1 gap-px border border-ink-100 bg-ink-100 md:grid-cols-2">
+          <div className="haze-inner grid grid-cols-1 gap-px overflow-hidden border border-bar/25 bg-bar/25 md:grid-cols-2">
             <div className="flex flex-col items-start gap-4 bg-white p-6">
               <p className="label text-ink-400">01</p>
               <h2 className="display-3">Students</h2>
@@ -68,7 +69,7 @@ export function Login() {
 
           {/* Organizer access. See src/admin/AdminContext.tsx — this is a local
               demo gate, not authentication. */}
-          <div className="mt-6 border border-ink-100 p-6">
+          <div className="haze-inner mt-6 border border-bar/25 p-6">
             <p className="label text-ink-400">03</p>
             <h2 className="display-3 mt-3">Organizers</h2>
 
@@ -100,7 +101,7 @@ export function Login() {
                     type="password"
                     value={passcode}
                     onChange={(changeEvent) => setPasscode(changeEvent.target.value)}
-                    className="min-w-0 flex-1 border border-ink-300 px-3 py-2.5 text-sm text-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-1 focus-visible:outline-blue-500"
+                    className="min-w-0 flex-1 border border-bar/45 px-3 py-2.5 text-sm text-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-1 focus-visible:outline-blue-500"
                   />
                   <button type="submit" className={buttonClassNames('primary')}>
                     Sign in
@@ -123,13 +124,14 @@ export function Login() {
             Nothing here is needed to take part yet. Write to{' '}
             <a
               href={`mailto:${event.contactEmail}`}
-              className="border-b border-ink-300 pb-0.5 text-ink-900 transition-colors duration-300 ease-out hover:border-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500"
+              className="border-b border-bar/45 pb-0.5 text-ink-900 transition-colors duration-300 ease-out hover:border-bar focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500"
             >
               {event.contactEmail}
             </a>{' '}
             with any question in the meantime.
           </p>
         </Reveal>
+        </div>
       </div>
     </Layout>
   );

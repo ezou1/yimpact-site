@@ -17,7 +17,8 @@ export function BlogPostPage() {
 
   return (
     <Layout pattern="story" title={`${post.title} · Yale Impact Expo`} description={post.excerpt}>
-      <article className="mx-auto max-w-[1200px] px-6 py-10 md:px-10 md:py-12">
+      <article className="mx-auto max-w-[1200px] px-4 py-6 sm:px-6 md:px-10 md:py-10">
+        <div className="haze px-5 py-8 sm:px-7 md:px-10 md:py-12">
         <Reveal>
           <p className="label text-ink-400">
             <Link
@@ -33,7 +34,7 @@ export function BlogPostPage() {
           <h1 className="display-2 mt-5 max-w-[26ch]">{post.title}</h1>
           <p className="mt-5 max-w-[62ch] text-lg leading-[1.5] tracking-[-0.02em] text-ink-700">{post.excerpt}</p>
 
-          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-1 border-y border-ink-100 py-3">
+          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-1 border-y border-bar/25 py-3">
             <p className="label text-ink-900">{post.author}</p>
             <p className="label text-ink-400">{post.authorRole}</p>
             <p className="label ml-auto text-ink-400">{formatPostDate(post.publishedAt)}</p>
@@ -47,7 +48,7 @@ export function BlogPostPage() {
         </Reveal>
 
         {more.length > 0 ? (
-          <section className="mt-16 border-t border-ink-100 pt-8" aria-labelledby="more-heading">
+          <section className="mt-16 border-t border-bar/25 pt-8" aria-labelledby="more-heading">
             <h2 id="more-heading" className="label text-ink-400">
               More from the Expo
             </h2>
@@ -60,6 +61,7 @@ export function BlogPostPage() {
             </ul>
           </section>
         ) : null}
+        </div>
       </article>
     </Layout>
   );

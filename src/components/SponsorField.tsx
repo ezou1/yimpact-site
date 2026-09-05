@@ -413,7 +413,7 @@ export function SponsorField({
               >
                 <p
                   style={{ fontSize: `${headingFont}px`, letterSpacing: headingTracking }}
-                  className="whitespace-nowrap border-b border-ink-100 pb-2 text-center font-mono font-medium uppercase leading-[1.4] text-ink-900"
+                  className="whitespace-nowrap border-b border-bar/25 pb-2 text-center font-mono font-medium uppercase leading-[1.4] text-ink-900"
                 >
                   {domainLabels[column.domain]}
                 </p>
@@ -461,7 +461,7 @@ export function SponsorField({
                 <Link
                   to={item.to}
                   title={item.name}
-                  className="flex h-full w-full items-center justify-center rounded-full border-2 border-brand bg-white transition-colors duration-300 ease-out hover:border-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+                  className="flex h-full w-full items-center justify-center rounded-full border-2 border-bar bg-white transition-colors duration-300 ease-out hover:border-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
                 >
                   {inner}
                   <span className="sr-only">{item.name}</span>
@@ -470,7 +470,7 @@ export function SponsorField({
                 <div
                   aria-hidden="true"
                   className={`flex h-full w-full items-center justify-center rounded-full ${
-                    item.isFiller ? 'border border-dashed border-brand/35 bg-white/60' : 'border-2 border-brand bg-white'
+                    item.isFiller ? 'border border-dashed border-bar/40 bg-white/60' : 'border-2 border-bar bg-white'
                   }`}
                 >
                   {inner}

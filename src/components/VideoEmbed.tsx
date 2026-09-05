@@ -9,7 +9,7 @@ interface VideoEmbedProps {
 export function VideoEmbed({ videoId, title }: VideoEmbedProps) {
   if (!videoId) {
     return (
-      <div className="flex aspect-video w-full flex-col items-center justify-center gap-3 border border-ink-100 bg-ink-50 px-6 text-center">
+      <div className="haze-inner flex aspect-video w-full flex-col items-center justify-center gap-3 border border-bar/25 bg-ink-50/70 px-6 text-center">
         <p className="label text-ink-400">Walkthrough</p>
         <p className="max-w-[38ch] text-sm leading-[1.55] text-ink-500">
           The video walkthrough is being recorded. It appears here as soon as the team publishes it.
@@ -19,7 +19,7 @@ export function VideoEmbed({ videoId, title }: VideoEmbedProps) {
   }
 
   return (
-    <div className="aspect-video w-full border border-ink-100 bg-ink-900">
+    <div className="haze-inner aspect-video w-full overflow-hidden border border-bar/25 bg-ink-900">
       <iframe
         src={`https://www.youtube-nocookie.com/embed/${videoId}`}
         title={title}
