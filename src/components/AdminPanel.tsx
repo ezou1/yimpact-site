@@ -22,7 +22,7 @@ export function AdminPanel({ officers, openId, onToggle }: AdminPanelProps) {
       </div>
       <p className="label mt-3 text-ink-400">Officers of the organization</p>
 
-      <ul className="mt-8 flex flex-wrap justify-center gap-4 xl:justify-start">
+      <ul className="mt-8 flex flex-wrap justify-center gap-3 2xl:justify-start">
         {officers.map((officer) => (
           <li key={officer.id}>
             <MemberChip

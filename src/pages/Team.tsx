@@ -36,7 +36,7 @@ export function Team() {
       title="Team · Yale Impact Expo"
       description="The students who run the Yale Impact Expo, and the officers of the organization behind it."
     >
-      <div className="mx-auto max-w-[1200px] px-4 py-6 sm:px-6 md:px-10 md:py-10">
+      <div className="mx-auto max-w-[1520px] px-4 py-6 sm:px-6 md:px-10 md:py-10">
         <div className="haze px-5 py-8 sm:px-7 md:px-10 md:py-12">
         <Reveal>
           <h1 className="display-2">
@@ -44,7 +44,7 @@ export function Team() {
           </h1>
         </Reveal>
 
-        <div className="mt-10 grid gap-10 xl:grid-cols-[200px_minmax(0,1fr)] xl:gap-10">
+        <div className="mt-10 grid gap-10 2xl:grid-cols-[200px_minmax(0,1fr)] 2xl:gap-10">
           <AdminPanel officers={adminOfficers} openId={openId} onToggle={toggle} />
 
           <div>
@@ -65,7 +65,7 @@ export function Team() {
                       </p>
                       <p className="mt-1.5 text-center text-xs text-ink-400">{row.note}</p>
 
-                      <ul className="mt-4 flex flex-wrap justify-center gap-4">
+                      <ul className="mt-4 flex flex-wrap justify-center gap-3">
                         {row.members.map((member) => (
                           <li key={member.id}>
                             <MemberChip
