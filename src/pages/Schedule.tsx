@@ -8,6 +8,7 @@ import { event } from '../content/event';
 export function Schedule() {
   return (
     <Layout
+      pattern="schedule"
       title="Schedule · Yale Impact Expo"
       description="The Expo weekend agenda: track showcases, judging, partner office hours, and the opportunity awards."
     >

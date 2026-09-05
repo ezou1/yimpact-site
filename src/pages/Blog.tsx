@@ -22,14 +22,15 @@ export function Blog() {
 
   return (
     <Layout
-      title="Blog · Yale Impact Expo"
-      description="Reporting from the Yale Impact Expo: the programme, its partners, its research, and its work in New Haven."
+      pattern="record"
+      title="The Impact Record · Yale Impact Expo"
+      description="The Impact Record: reporting from the Yale Impact Expo on the programme, its partners, its research, and its work in New Haven."
     >
       {/* The masthead. A newspaper nameplate, straightened out. */}
       <div className="border-b border-ink-100">
         <div className="mx-auto flex max-w-[1200px] flex-wrap items-baseline justify-between gap-x-8 gap-y-2 px-6 py-8 md:px-10 md:py-10">
           <h1 className="display-2">
-            The Expo <span className="accent-serif">Record</span>
+            The Impact <span className="accent-serif">Record</span>
           </h1>
           <p className="label text-ink-400">Reporting from the Yale Impact Expo</p>
         </div>

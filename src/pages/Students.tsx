@@ -11,6 +11,7 @@ import { studentSteps, walkthroughSummary, walkthroughTitle, walkthroughVideoId 
 export function Students() {
   return (
     <Layout
+      pattern="students"
       title="Students · Yale Impact Expo"
       description="What the Yale Impact Expo is, what a semester looks like, and how any Yale student can take part."
     >
@@ -18,8 +19,7 @@ export function Students() {
         eyebrow="For students"
         title={
           <>
-            Build something serious, and earn access to the people who can <span className="accent-serif">advance</span>{' '}
-            it
+            Spend a semester on something that does <span className="accent-serif">good</span>
           </>
         }
         meta="Open to every Yale student, in every school and every year. No team required, no prototype required, no prior connection to a lab or a firm required. Free to take part."
@@ -36,9 +36,10 @@ export function Students() {
               <h2 className="display-2 max-w-[18ch]">Start here</h2>
               <p className="mt-4 text-base leading-[1.6] text-ink-700">{walkthroughSummary}</p>
               <p className="mt-4 text-sm leading-[1.6] text-ink-500">
-                The short version: pick a problem you actually care about, spend a semester doing it justice with
-                faculty and partner mentorship behind you, and present the result to the people who can fund it, run
-                it, publish it, or hire you to keep going.
+                The short version: pick a problem that matters to someone other than you, spend a semester doing it
+                justice with faculty and partner mentorship behind you, and present the result to the people who can
+                actually put it to use. That the same room can advance your own path is a genuine bonus — it is not
+                why the programme exists.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <a href={`mailto:${event.contactEmail}`} className={buttonClassNames('primary')}>
@@ -96,8 +97,13 @@ export function Students() {
         <section className="mt-16 border-t border-ink-100 pt-8" aria-labelledby="leave-with-heading">
           <Reveal>
             <h2 id="leave-with-heading" className="display-2">
-              What strong teams leave with
+              How good work keeps going
             </h2>
+            <p className="mt-4 max-w-[68ch] text-base leading-[1.6] text-ink-700">
+              These pathways exist to carry a project further than a weekend. They advance the students behind it as
+              a consequence, which we are glad about — but every one of them is judged on whether the work reaches
+              the people it was built for.
+            </p>
             <ul className="mt-6 grid gap-px border border-ink-100 bg-ink-100 sm:grid-cols-2 lg:grid-cols-3">
               {pathways.map((pathway) => (
                 <li key={pathway.id} className="bg-white p-4">

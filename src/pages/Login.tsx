@@ -1,15 +1,35 @@
+import { useState } from 'react';
+import type { FormEvent } from 'react';
+import { Link } from 'react-router-dom';
 import { Layout } from '../components/layout/Layout';
 import { PageHeader } from '../components/ui/PageHeader';
 import { Reveal } from '../components/ui/Reveal';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
+import { buttonClassNames } from '../components/ui/Button';
 import { event } from '../content/event';
+import { useAdmin } from '../admin/AdminContext';
 
 export function Login() {
+  const { isAdmin, signIn, signOut } = useAdmin();
+  const [passcode, setPasscode] = useState('');
+  const [error, setError] = useState<string | null>(null);
+
+  function handleSubmit(submitEvent: FormEvent) {
+    submitEvent.preventDefault();
+    if (signIn(passcode)) {
+      setPasscode('');
+      setError(null);
+    } else {
+      setError('That passcode is not recognised.');
+    }
+  }
+
   return (
     <Layout
+      pattern="login"
       title="Log in · Yale Impact Expo"
-      description="Sign in to the Yale Impact Expo student and partner portal."
+      description="Sign in to the Yale Impact Expo student, partner, and organizer portal."
     >
       <PageHeader
         eyebrow="Portal"
@@ -44,6 +64,59 @@ export function Login() {
               </Button>
               <Badge id="partner-badge">Coming soon</Badge>
             </div>
+          </div>
+
+          {/* Organizer access. See src/admin/AdminContext.tsx — this is a local
+              demo gate, not authentication. */}
+          <div className="mt-6 border border-ink-100 p-6">
+            <p className="label text-ink-400">03</p>
+            <h2 className="display-3 mt-3">Organizers</h2>
+
+            {isAdmin ? (
+              <div className="mt-4">
+                <p className="text-sm leading-[1.6] text-ink-500">
+                  Signed in as an organizer. The Partners page now shows the add-a-partner control.
+                </p>
+                <div className="mt-5 flex flex-wrap gap-3">
+                  <Link to="/sponsors" className={buttonClassNames('primary')}>
+                    Go to Partners
+                  </Link>
+                  <button type="button" onClick={signOut} className={buttonClassNames('secondary')}>
+                    Sign out
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="mt-4 max-w-[420px]">
+                <p className="text-sm leading-[1.6] text-ink-500">
+                  Organizers sign in here to add partners to the field.
+                </p>
+                <label htmlFor="admin-passcode" className="label mt-5 block text-ink-400">
+                  Organizer passcode
+                </label>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  <input
+                    id="admin-passcode"
+                    type="password"
+                    value={passcode}
+                    onChange={(changeEvent) => setPasscode(changeEvent.target.value)}
+                    className="min-w-0 flex-1 border border-ink-300 px-3 py-2.5 text-sm text-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-1 focus-visible:outline-blue-500"
+                  />
+                  <button type="submit" className={buttonClassNames('primary')}>
+                    Sign in
+                  </button>
+                </div>
+                {error ? (
+                  <p role="alert" className="mt-3 text-xs text-ink-900">
+                    {error}
+                  </p>
+                ) : null}
+                <p className="mt-4 text-xs leading-[1.55] text-ink-400">
+                  This gate runs in the browser and protects nothing. It exists so the team can try the
+                  add-a-partner flow before the backend exists.
+                </p>
+              </form>
+            )}
           </div>
 
           <p className="mt-6 max-w-[62ch] text-sm leading-[1.6] text-ink-500">

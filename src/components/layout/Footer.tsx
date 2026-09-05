@@ -10,7 +10,7 @@ const footerLinks = [
   { to: '/sponsors', label: 'Partners' },
   { to: '/team', label: 'Team' },
   { to: '/schedule', label: 'Schedule' },
-  { to: '/blog', label: 'Blog' },
+  { to: '/blog', label: 'The Record' },
 ];
 
 export function Footer({ contactEmail, sponsorEmail }: FooterProps) {

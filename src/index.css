@@ -9,6 +9,10 @@
   --color-ink-100: #e4e9f0;
   --color-ink-50: #f6f8fb;
 
+  /* The brand red. Used for the top bar, page patterns, and bubble outlines.
+     Yale navy stays the accent for buttons and links. */
+  --color-brand: #e00034;
+
   --color-blue-900: #00224a;
   --color-blue-700: #00356b;
   --color-blue-500: #286dc0;
@@ -93,6 +97,60 @@ body {
 .reveal[data-shown] {
   opacity: 1;
   transform: none;
+}
+
+/* Every page carries its own geometric motif, drawn large and held well
+   back. Squares, circles, triangles and their subdivisions — the home page
+   opens on a quatrefoil lattice and fades to nothing as the reader scrolls. */
+.pattern-home {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg fill='none' stroke='%23e00034' stroke-opacity='0.30' stroke-width='1.2'%3E%3Ccircle cx='130' cy='92' r='38'/%3E%3Ccircle cx='130' cy='168' r='38'/%3E%3Ccircle cx='92' cy='130' r='38'/%3E%3Ccircle cx='168' cy='130' r='38'/%3E%3Ccircle cx='130' cy='130' r='9'/%3E%3Crect x='76' y='76' width='108' height='108' transform='rotate(45 130 130)'/%3E%3Crect x='53' y='53' width='154' height='154' transform='rotate(45 130 130)' stroke-opacity='0.14'/%3E%3Cg stroke-opacity='0.16'%3E%3Ccircle cx='0' cy='0' r='38'/%3E%3Ccircle cx='260' cy='0' r='38'/%3E%3Ccircle cx='0' cy='260' r='38'/%3E%3Ccircle cx='260' cy='260' r='38'/%3E%3Ccircle cx='0' cy='130' r='9'/%3E%3Ccircle cx='260' cy='130' r='9'/%3E%3Ccircle cx='130' cy='0' r='9'/%3E%3Ccircle cx='130' cy='260' r='9'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-size: 260px 260px;
+}
+
+.pattern-students {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%23e00034' stroke-opacity='0.13' stroke-width='1.2'%3E%3Cpath d='M120 26 L214 190 L26 190 Z'/%3E%3Cpath d='M167 108 L120 190 L73 108 Z'/%3E%3Cg stroke-opacity='0.55'%3E%3Cpath d='M143.5 67 L120 108 L96.5 67 Z'/%3E%3Cpath d='M96.5 149 L73 190 L49.5 149 Z'/%3E%3Cpath d='M190.5 149 L167 190 L143.5 149 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-size: 240px 240px;
+}
+
+.pattern-team {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23e00034' stroke-opacity='0.13' stroke-width='1.2'%3E%3Crect x='35' y='35' width='150' height='150' transform='rotate(45 110 110)'/%3E%3Crect x='57' y='57' width='106' height='106' transform='rotate(45 110 110)'/%3E%3Crect x='79' y='79' width='62' height='62' transform='rotate(45 110 110)'/%3E%3Crect x='99' y='99' width='22' height='22' transform='rotate(45 110 110)'/%3E%3Cg stroke-opacity='0.5'%3E%3Ccircle cx='0' cy='0' r='16'/%3E%3Ccircle cx='220' cy='0' r='16'/%3E%3Ccircle cx='0' cy='220' r='16'/%3E%3Ccircle cx='220' cy='220' r='16'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-size: 220px 220px;
+}
+
+.pattern-schedule {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%23e00034' stroke-opacity='0.12' stroke-width='1.2'%3E%3Ccircle cx='100' cy='100' r='64'/%3E%3Ccircle cx='100' cy='100' r='26'/%3E%3Crect x='86' y='86' width='28' height='28'/%3E%3Cg stroke-opacity='0.55'%3E%3Ccircle cx='0' cy='0' r='64'/%3E%3Ccircle cx='200' cy='0' r='64'/%3E%3Ccircle cx='0' cy='200' r='64'/%3E%3Ccircle cx='200' cy='200' r='64'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+.pattern-record {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23e00034' stroke-opacity='0.11' stroke-width='1.2'%3E%3Ccircle cx='110' cy='110' r='76'/%3E%3Ccircle cx='0' cy='110' r='76'/%3E%3Ccircle cx='220' cy='110' r='76'/%3E%3Ccircle cx='110' cy='0' r='76'/%3E%3Ccircle cx='110' cy='220' r='76'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 220px 220px;
+}
+
+.pattern-story {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23e00034' stroke-opacity='0.12' stroke-width='1.2'%3E%3Cpath d='M0 55 A55 55 0 0 1 110 55 A55 55 0 0 1 220 55'/%3E%3Cpath d='M-55 165 A55 55 0 0 1 55 165 A55 55 0 0 1 165 165 A55 55 0 0 1 275 165'/%3E%3Cg stroke-opacity='0.5'%3E%3Ccircle cx='55' cy='55' r='7'/%3E%3Ccircle cx='165' cy='55' r='7'/%3E%3Ccircle cx='0' cy='165' r='7'/%3E%3Ccircle cx='110' cy='165' r='7'/%3E%3Ccircle cx='220' cy='165' r='7'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-size: 220px 220px;
+}
+
+.pattern-partner {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%23e00034' stroke-opacity='0.12' stroke-width='1.2'%3E%3Ccircle cx='120' cy='120' r='108'/%3E%3Ccircle cx='120' cy='120' r='80'/%3E%3Ccircle cx='120' cy='120' r='52'/%3E%3Ccircle cx='120' cy='120' r='24'/%3E%3Cg stroke-opacity='0.5'%3E%3Ccircle cx='0' cy='0' r='30'/%3E%3Ccircle cx='240' cy='0' r='30'/%3E%3Ccircle cx='0' cy='240' r='30'/%3E%3Ccircle cx='240' cy='240' r='30'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-size: 240px 240px;
+}
+
+.pattern-login {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%23e00034' stroke-opacity='0.13' stroke-width='1.2'%3E%3Crect x='25' y='25' width='150' height='150'/%3E%3Crect x='46' y='46' width='108' height='108'/%3E%3Crect x='67' y='67' width='66' height='66'/%3E%3Crect x='88' y='88' width='24' height='24'/%3E%3Cg stroke-opacity='0.5'%3E%3Ccircle cx='100' cy='100' r='88'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+.pattern-notfound {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%23e00034' stroke-opacity='0.13' stroke-width='1.2'%3E%3Cpath d='M60 40 L110 124 L10 124 Z'/%3E%3Cpath d='M180 92 L224 168 L136 168 Z'/%3E%3Cpath d='M120 152 L162 224 L78 224 Z' stroke-opacity='0.6'/%3E%3Cpath d='M212 20 L236 62 L188 62 Z' stroke-opacity='0.6'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 240px 240px;
+}
+
+/* Only the home wash fades out; the rest hold across the whole page. */
+.pattern-fade {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 0.55) 46%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 0.55) 46%, transparent 100%);
 }
 
 @media (prefers-reduced-motion: reduce) {

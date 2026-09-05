@@ -36,7 +36,7 @@ export function Home() {
   const latestPosts = postsByDate.slice(0, 3);
 
   return (
-    <Layout title="Yale Impact Expo" description={event.tagline}>
+    <Layout pattern="home" title="Yale Impact Expo" description={event.tagline}>
       {/* The title screen keeps its air. Everything below it runs tighter. */}
       <div className="mx-auto max-w-[1200px] px-6 pb-20 pt-16 md:px-10 md:pb-28 md:pt-32">
         <Reveal>
@@ -58,24 +58,25 @@ export function Home() {
             </a>
           </div>
           <p className="mt-5 max-w-[54ch] text-sm leading-[1.55] text-ink-400">
-            Students: watch the two-minute walkthrough and apply. Sponsors: write to us and we will send the partner
-            brief for your domain.
+            Students: watch the walkthrough and bring a problem worth a semester. Sponsors: write to us and we will
+            send the partner brief for your domain.
           </p>
         </Reveal>
       </div>
 
-      <Section index="01" eyebrow="Mission" heading="Opportunity, made something you can earn">
+      <Section index="01" eyebrow="Mission" heading="Work that leaves the building">
         <div className="grid gap-8 md:grid-cols-2">
           <div className="space-y-4 text-base leading-[1.6] text-ink-700">
             <p>{event.mission}</p>
             <p>
-              Every year a great deal of serious thinking at Yale stops at the end of a seminar, because the student
-              who did it had no route to a lab, a firm, a funder, or an agency who could carry it further. Some
-              students arrive already holding those connections. Most do not.
+              Every year a great deal of serious thinking at Yale stops at the end of a seminar. A bias study nobody
+              acts on. A housing analysis the city never sees. A tool that would help a clinic, sitting in a
+              repository. The waste is not of student potential — it is of the good that work could have done.
             </p>
             <p>
-              The Expo is our attempt to close that gap in the fairest way we know: put the work in front of the
-              people who can advance it, and let its quality do the arguing.
+              So the Expo is built around a single question, asked of every project: who is better off if this
+              succeeds? Teams answer it in week one and are held to that answer in front of a judging panel that
+              includes the people they claim to serve.
             </p>
           </div>
           <ul className="grid grid-cols-2 gap-px self-start border border-ink-100 bg-ink-100">
@@ -97,8 +98,8 @@ export function Home() {
       <Section
         index="02"
         eyebrow="Tracks"
-        heading="Eight tracks, and none of them require code"
-        intro="Tracks organize judging, mentorship, and partner placement. A team might build an AI tool, audit an algorithm, write a policy memo, design a health intervention, or draft a New Haven pilot plan."
+        heading="Eight tracks, one question"
+        intro="Tracks organize judging, mentorship, and partner placement. A team might build an AI tool, audit an algorithm, write a policy memo, design a health intervention, or draft a New Haven pilot plan. Whatever the form, the standard is the same: research-backed, ethical, feasible, and pointed at genuine public benefit."
       >
         <ul className="grid gap-px border border-ink-100 bg-ink-100 sm:grid-cols-2">
           {tracks.map((track) => (
@@ -113,9 +114,9 @@ export function Home() {
 
       <Section
         index="03"
-        eyebrow="Awards"
-        heading="We compete on opportunity, not prize money"
-        intro="A cheque is spent by June. An introduction to the lab, the firm, or the agency that can carry your work forward changes what you are able to do next."
+        eyebrow="Pathways"
+        heading="We strive to empower change"
+        intro="Good work should not die at the closing reception. So we push opportunities toward the teams who can further these missions — funding, placements, legal support, pilots. Those doors advance careers too, and that is a welcome bonus. It is not the point."
       >
         <ul className="border-t border-ink-100">
           {pathways.map((pathway, index) => (
@@ -174,7 +175,7 @@ export function Home() {
         </p>
       </Section>
 
-      <Section index="07" eyebrow="Blog" heading="From the newsroom">
+      <Section index="07" eyebrow="The Impact Record" heading="From the newsroom">
         <ul className="grid gap-6 md:grid-cols-3">
           {latestPosts.map((post) => (
             <li key={post.slug}>
@@ -222,7 +223,8 @@ export function Home() {
           <div>
             <p className="label text-ink-400">Students</p>
             <p className="mt-2 max-w-[46ch] text-sm leading-[1.6] text-ink-700">
-              Start with the walkthrough, then write to us with anything the FAQ does not answer.
+              Bring a problem you cannot stop thinking about. Start with the walkthrough, then write to us with
+              anything the FAQ does not answer.
             </p>
             <Link to="/students" className={`${buttonClassNames('secondary')} mt-4`}>
               How to get involved
@@ -232,7 +234,7 @@ export function Home() {
             <p className="label text-ink-400">Sponsors and partners</p>
             <p className="mt-2 max-w-[46ch] text-sm leading-[1.6] text-ink-700">
               Tell us your domain and we will send the partner brief, the judging model, and the track placements
-              still open.
+              still open. Partnership here is measured by what it makes possible, not by the size of the cheque.
             </p>
             <a href={`mailto:${event.sponsorEmail}`} className={`${buttonClassNames('primary')} mt-4`}>
               {event.sponsorEmail}

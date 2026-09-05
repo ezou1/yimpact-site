@@ -16,7 +16,7 @@ export function BlogPostPage() {
   const more = postsByDate.filter((other) => other.slug !== post.slug).slice(0, 3);
 
   return (
-    <Layout title={`${post.title} · Yale Impact Expo`} description={post.excerpt}>
+    <Layout pattern="story" title={`${post.title} · Yale Impact Expo`} description={post.excerpt}>
       <article className="mx-auto max-w-[1200px] px-6 py-10 md:px-10 md:py-12">
         <Reveal>
           <p className="label text-ink-400">
