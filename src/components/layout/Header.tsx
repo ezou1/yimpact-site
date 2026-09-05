@@ -1,5 +1,4 @@
 import { NavLink } from 'react-router-dom';
-import { Wordmark } from './Wordmark';
 
 const navItems = [
   { to: '/sponsors', label: 'Partners' },
@@ -16,10 +15,9 @@ export function Header() {
       <div className="mx-auto flex h-[calc(var(--header-h)-1px)] max-w-[1200px] items-center justify-between gap-6 px-6 md:px-10">
         <NavLink
           to="/"
-          aria-label="Yale Impact Expo — home"
-          className="shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+          className="shrink-0 text-base font-medium tracking-[-0.035em] text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
         >
-          <Wordmark />
+          Yale Impact <span className="accent-serif">Expo</span>
         </NavLink>
         <nav aria-label="Main" className="min-w-0">
           <ul className="flex items-center gap-x-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
