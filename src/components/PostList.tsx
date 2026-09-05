@@ -7,6 +7,26 @@ export function formatPostDate(iso: string): string {
   return dateFormatter.format(new Date(iso));
 }
 
+// An upload has no known size, so the box holds a fixed ratio. Section 3.9 of
+// BUILD_SPEC.md needs a width and a height on every image.
+const coverWidth = 960;
+const coverHeight = 640;
+
+function Cover({ post, className = '' }: { post: BlogPost; className?: string }) {
+  if (!post.coverUrl) return null;
+
+  return (
+    <img
+      src={post.coverUrl}
+      alt={post.coverAlt ?? ''}
+      width={coverWidth}
+      height={coverHeight}
+      loading="lazy"
+      className={`aspect-[3/2] w-full bg-ink-50 object-cover grayscale transition-[filter] duration-500 ease-out group-hover:grayscale-0 ${className}`}
+    />
+  );
+}
+
 // The byline strip that runs under every headline: category, date, author.
 export function Byline({ post, className = '' }: { post: BlogPost; className?: string }) {
   return (
@@ -24,7 +44,8 @@ export function Byline({ post, className = '' }: { post: BlogPost; className?: s
 // clause the way a front page carries a lede.
 export function LeadStory({ post }: { post: BlogPost }) {
   return (
-    <article className="border-b border-ink-100 pb-10">
+    <article className="group border-b border-ink-100 pb-10">
+      <Cover post={post} className="mb-6" />
       <p className="label text-blue-500">{post.kicker}</p>
       <h2 className="display-2 mt-3 max-w-[24ch]">
         <Link
@@ -43,7 +64,8 @@ export function LeadStory({ post }: { post: BlogPost }) {
 // A story in the ruled river below the lead.
 export function PostCard({ post }: { post: BlogPost }) {
   return (
-    <article className="flex h-full flex-col border-t border-ink-100 pt-4">
+    <article className="group flex h-full flex-col border-t border-ink-100 pt-4">
+      <Cover post={post} className="mb-4" />
       <p className="label text-ink-400">{post.kicker}</p>
       <h3 className="mt-2 text-lg font-medium leading-[1.2] tracking-[-0.032em] text-ink-900">
         <Link
@@ -82,5 +104,37 @@ export function LatestRail({ posts }: { posts: BlogPost[] }) {
         ))}
       </ul>
     </aside>
+  );
+}
+
+// Bars that hold the same geometry while the stories load. There is no pulse.
+// Section 3.9 keeps every transition at 200 milliseconds or less, and this
+// site carries one animation only.
+export function PostListSkeleton() {
+  return (
+    <>
+      <p className="sr-only" role="status">
+        Loading stories
+      </p>
+      <div aria-hidden="true">
+        <div className="border-b border-ink-100 pb-10">
+          <div className="h-3 w-24 bg-ink-50" />
+          <div className="mt-4 h-8 w-full max-w-[24ch] bg-ink-50" />
+          <div className="mt-3 h-8 w-full max-w-[18ch] bg-ink-50" />
+          <div className="mt-6 h-3 w-full max-w-[62ch] bg-ink-50" />
+          <div className="mt-2 h-3 w-full max-w-[54ch] bg-ink-50" />
+        </div>
+        <ul className="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2">
+          {[0, 1, 2, 3].map((index) => (
+            <li key={index} className="border-t border-ink-100 pt-4">
+              <div className="h-3 w-20 bg-ink-50" />
+              <div className="mt-3 h-5 w-full bg-ink-50" />
+              <div className="mt-2 h-5 w-3/4 bg-ink-50" />
+              <div className="mt-4 h-3 w-full bg-ink-50" />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }

@@ -96,6 +96,8 @@ export interface BlogPost {
   excerpt: string;
   body: string[]; // One string per paragraph.
   lead: boolean; // True for the story that leads the Blog page.
+  coverUrl?: string; // The image the announcements form uploads.
+  coverAlt?: string;
 }
 
 export interface EventDetails {

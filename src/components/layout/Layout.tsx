@@ -7,23 +7,41 @@ import { event } from '../../content/event';
 interface LayoutProps {
   title: string;
   description: string;
+  image?: string;
   children: ReactNode;
 }
 
+// Set or make one meta tag. Vite does not render a page on the server, so
+// each page writes its own tags here.
+function setMeta(attribute: 'name' | 'property', key: string, value: string) {
+  const selector = `meta[${attribute}="${key}"]`;
+  let tag = document.querySelector(selector);
+  if (!tag) {
+    tag = document.createElement('meta');
+    tag.setAttribute(attribute, key);
+    document.head.appendChild(tag);
+  }
+  tag.setAttribute('content', value);
+}
+
 // Each page sets its own title and description. This keeps the two in sync
-// with the page content, because Vite does not render pages on the server.
-export function Layout({ title, description, children }: LayoutProps) {
+// with the page content.
+//
+// A card reader on Slack or LinkedIn does not run JavaScript, so these tags
+// help a reader inside the site and not a card outside it. A server function
+// for /blog/:slug is the real answer, and it is a later task.
+export function Layout({ title, description, image, children }: LayoutProps) {
   useEffect(() => {
     document.title = title;
-
-    let meta = document.querySelector('meta[name="description"]');
-    if (!meta) {
-      meta = document.createElement('meta');
-      meta.setAttribute('name', 'description');
-      document.head.appendChild(meta);
+    setMeta('name', 'description', description);
+    setMeta('property', 'og:title', title);
+    setMeta('property', 'og:description', description);
+    setMeta('property', 'og:type', 'website');
+    setMeta('name', 'twitter:card', image ? 'summary_large_image' : 'summary');
+    if (image) {
+      setMeta('property', 'og:image', image);
     }
-    meta.setAttribute('content', description);
-  }, [title, description]);
+  }, [title, description, image]);
 
   return (
     <div className="flex min-h-screen flex-col bg-white">

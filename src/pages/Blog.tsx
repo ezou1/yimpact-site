@@ -1,8 +1,9 @@
 import { useMemo, useState } from 'react';
 import { Layout } from '../components/layout/Layout';
 import { Reveal } from '../components/ui/Reveal';
-import { LatestRail, LeadStory, PostCard } from '../components/PostList';
-import { postsByDate } from '../content/blog';
+import { LatestRail, LeadStory, PostCard, PostListSkeleton } from '../components/PostList';
+import { ErrorNote } from '../components/ui/Status';
+import { usePosts } from '../hooks/usePosts';
 import type { BlogCategory } from '../types/content';
 
 const categories: BlogCategory[] = ['Announcements', 'Campus', 'Partners', 'Research', 'New Haven', 'Opinion'];
@@ -10,11 +11,12 @@ const categories: BlogCategory[] = ['Announcements', 'Campus', 'Partners', 'Rese
 type CategoryFilter = BlogCategory | 'all';
 
 export function Blog() {
+  const { posts, status, retry } = usePosts();
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>('all');
 
   const visible = useMemo(
-    () => (activeCategory === 'all' ? postsByDate : postsByDate.filter((post) => post.category === activeCategory)),
-    [activeCategory],
+    () => (activeCategory === 'all' ? posts : posts.filter((post) => post.category === activeCategory)),
+    [posts, activeCategory],
   );
 
   const lead = visible.find((post) => post.lead) ?? visible[0];
@@ -59,28 +61,48 @@ export function Blog() {
       <div className="mx-auto max-w-[1200px] px-6 py-10 md:px-10">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_260px] lg:gap-12">
           <div>
-            {lead ? (
-              <Reveal>
-                <LeadStory post={lead} />
-              </Reveal>
-            ) : (
-              <p className="text-sm text-ink-500">No stories in this section yet.</p>
-            )}
+            {status === 'loading' ? <PostListSkeleton /> : null}
 
-            {rest.length > 0 ? (
-              <Reveal>
-                <ul className="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2">
-                  {rest.map((post) => (
-                    <li key={post.slug}>
-                      <PostCard post={post} />
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
+            {status === 'error' ? (
+              <ErrorNote>
+                The stories did not load.{' '}
+                <button
+                  type="button"
+                  onClick={retry}
+                  className="border-b border-ink-300 pb-0.5 text-ink-900 transition-colors duration-300 ease-out hover:border-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500"
+                >
+                  Try again
+                </button>
+                .
+              </ErrorNote>
+            ) : null}
+
+            {status === 'ready' ? (
+              <>
+                {lead ? (
+                  <Reveal>
+                    <LeadStory post={lead} />
+                  </Reveal>
+                ) : (
+                  <p className="text-sm text-ink-500">No stories in this section yet.</p>
+                )}
+
+                {rest.length > 0 ? (
+                  <Reveal>
+                    <ul className="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2">
+                      {rest.map((post) => (
+                        <li key={post.slug}>
+                          <PostCard post={post} />
+                        </li>
+                      ))}
+                    </ul>
+                  </Reveal>
+                ) : null}
+              </>
             ) : null}
           </div>
 
-          <LatestRail posts={postsByDate.slice(0, 6)} />
+          <LatestRail posts={posts.slice(0, 6)} />
         </div>
       </div>
     </Layout>

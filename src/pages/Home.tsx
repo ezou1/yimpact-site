@@ -14,7 +14,7 @@ import { organizers } from '../content/organizers';
 import { tracks } from '../content/tracks';
 import { pathways } from '../content/pathways';
 import { faq } from '../content/faq';
-import { postsByDate } from '../content/blog';
+import { usePosts } from '../hooks/usePosts';
 
 const inlineLink =
   'label text-ink-500 transition-colors duration-300 ease-out hover:text-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500';
@@ -33,7 +33,10 @@ function SerifTail({ text }: { text: string }) {
 export function Home() {
   const featuredSponsors = sponsors.filter((sponsor) => sponsor.featured);
   const council = organizers.filter((organizer) => organizer.rank !== 'team').slice(0, 5);
-  const latestPosts = postsByDate.slice(0, 3);
+  // The hero must not wait on a request. This section stays empty until the
+  // stories arrive.
+  const { posts } = usePosts();
+  const latestPosts = posts.slice(0, 3);
 
   return (
     <Layout title="Yale Impact Expo" description={event.tagline}>
@@ -175,7 +178,7 @@ export function Home() {
       </Section>
 
       <Section index="07" eyebrow="Blog" heading="From the newsroom">
-        <ul className="grid gap-6 md:grid-cols-3">
+        <ul className="grid gap-6 md:grid-cols-3" aria-busy={latestPosts.length === 0}>
           {latestPosts.map((post) => (
             <li key={post.slug}>
               <article className="border-t border-ink-100 pt-4">
