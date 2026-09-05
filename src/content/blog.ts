@@ -20,6 +20,7 @@ export const posts: BlogPost[] = [
       'The semester ends with the Expo weekend, where teams present to partners across nine domains, and the strongest work leaves with commitments attached to it. We are not primarily offering prize money. We are offering the people and institutions who can move a project forward, in one room, for one weekend, ready to be convinced.',
     ],
     lead: true,
+    sponsorIds: ['ferrovia-logistics', 'solstice-technologies', 'tidewater-resilience-fund'],
   },
   {
     slug: 'nine-domains-one-standard',
@@ -37,6 +38,7 @@ export const posts: BlogPost[] = [
       'The rules are short. No sponsor owns a track. Every partner may judge, but the Expo team assigns the panels, balanced across sectors so that no single organization decides an outcome. Opportunity commitments are stated plainly, so that students know the difference between a guaranteed placement and a conversation. And community partners are never priced out of a room built partly to serve their neighbourhoods.',
     ],
     lead: false,
+    sponsorIds: ['cascade-ai-labs', 'harborlight-foundation', 'halloway-and-reed', 'ferrovia-logistics'],
   },
   {
     slug: 'what-new-haven-asked-for',
@@ -54,23 +56,26 @@ export const posts: BlogPost[] = [
       'Those requests are now problem prompts, and the organizations that raised them sit on the judging panels. A civic project that the community it names would not actually want is not a successful project, however well it presents.',
     ],
     lead: false,
+    sponsorIds: ['office-of-regional-innovation', 'copperfield-community-health', 'common-ground-alliance'],
   },
   {
     slug: 'opportunity-not-prizes',
-    title: 'Why the Expo does not lead with prize money',
+    title: 'Why we measure this programme by what it changes, not what it pays',
     category: 'Opinion',
     kicker: 'From the chair',
     publishedAt: '2026-03-02T09:00:00-05:00',
     author: 'Jamal Whitfield',
     authorRole: 'Chairman',
     excerpt:
-      'A cheque is spent by June. An introduction to the lab, the firm, or the agency that can carry your work forward changes what you are able to do next.',
+      'A cheque is spent by June. A project that a city agency actually adopts outlives everyone who built it. We strive to empower change, and we push opportunities toward the teams furthering that mission.',
     body: [
       'We were advised, more than once, to put a large cash prize at the centre of this programme. It is the easiest thing to advertise. We decided against it, and the reasoning is worth stating publicly.',
-      'Prize money rewards a weekend. What students told us they wanted was a route — into a lab, onto a policy desk, in front of an investor, alongside a legal team who could actually incorporate the nonprofit they had spent four months designing. Those routes are worth more than the cheque, and they are precisely what is unevenly distributed on this campus.',
-      'So the awards at this Expo are opportunities: research placements, office hours, formation support, technical credits, pilot access, and continuation grants. They are harder to photograph and considerably harder to arrange. They are also the only version of this programme that still matters to a student a year later.',
+      'A prize rewards a weekend. It does not tell you whether the housing tool got used, whether the bias audit changed a policy, or whether the clinic is better off. Those are the only outcomes this programme is actually for, and none of them can be settled by a cheque handed over on a Sunday afternoon.',
+      'So the awards here are pathways that carry work forward: research placements, formation support, technical credits, pilot access, and continuation grants. They exist to further the mission a team chose, and they are judged on whether the work reaches the people it was built for.',
+      'They also, plainly, open doors for the students involved. We are glad about that. A student who spends a semester doing serious public-interest work should find it easier to get where they are going. But the door is the bonus. The change is the point, and we would rather run a programme that improves one neighbourhood than one that photographs well.',
     ],
     lead: false,
+    sponsorIds: ['elmwood-venture-partners', 'harborlight-foundation', 'greenline-climate-trust'],
   },
   {
     slug: 'faculty-join-the-panels',
@@ -88,6 +93,7 @@ export const posts: BlogPost[] = [
       'For teams whose work holds up, several partners have committed lab placements and research assistant roles beginning immediately after the weekend.',
     ],
     lead: false,
+    sponsorIds: ['whitfield-university-research-office', 'lakeside-institute-for-data-science', 'bridgeview-academic-consortium'],
   },
   {
     slug: 'how-teams-are-formed',
@@ -105,6 +111,7 @@ export const posts: BlogPost[] = [
       'The teams that come out of this are usually more mixed than the ones that arrive pre-formed: a computer science major, a public health student, and someone from the law school looking at the same problem from three directions. In our experience, that combination is what makes a project survive contact with a judging panel.',
     ],
     lead: false,
+    sponsorIds: ['founders-bridge-collective', 'new-quad-ventures', 'northwind-energy-alliance'],
   },
   {
     slug: 'guardrails-for-sensitive-work',
@@ -122,6 +129,7 @@ export const posts: BlogPost[] = [
       'The effect has been the opposite of what people expect from a constraint. Knowing that a methodologist will read the work makes teams sharper about what their evidence can and cannot support — which is, in the end, the skill the whole programme is trying to teach.',
     ],
     lead: false,
+    sponsorIds: ['cascade-ai-labs', 'carrow-public-interest-law', 'wellspring-health-partners'],
   },
 ];
 

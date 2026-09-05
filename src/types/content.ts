@@ -18,6 +18,10 @@ export interface Sponsor {
   name: string;
   domain: Domain;
   tier: SponsorTier;
+  // Impact, 0-100. Drives bubble diameter directly, so it is a continuous
+  // value rather than one of a few fixed sizes. Within a domain column a
+  // higher impact always sits higher and draws larger.
+  impact: number;
   logoUrl: string;
   websiteUrl?: string;
   blurb?: string; // One or two sentences. The /sponsors page shows it.
@@ -37,7 +41,7 @@ export interface Organizer {
   headshotUrl: string;
   bio: string;
   linkedinUrl?: string;
-  email?: string;
+  email: string;
 }
 
 // Officers of the organization rather than of the Expo itself. These appear
@@ -48,7 +52,8 @@ export interface AdminOfficer {
   role: string; // Example: "President"
   affiliation?: string;
   headshotUrl: string;
-  email?: string;
+  bio: string;
+  email: string;
 }
 
 export interface ScheduleItem {
@@ -95,7 +100,8 @@ export interface BlogPost {
   authorRole: string;
   excerpt: string;
   body: string[]; // One string per paragraph.
-  lead: boolean; // True for the story that leads the Blog page.
+  lead: boolean; // True for the story that leads The Impact Record.
+  sponsorIds?: string[]; // Partners whose page also carries this story.
 }
 
 export interface EventDetails {

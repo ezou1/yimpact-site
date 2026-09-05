@@ -1,7 +1,7 @@
 import type { Pathway } from '../types/content';
 
-// The Expo competes on opportunity rather than on prize money. These are the
-// routes a strong team can take out of the weekend.
+// How good work keeps going after the weekend. These pathways exist to carry a
+// project further, and they advance the students behind it as a consequence.
 export const pathways: Pathway[] = [
   {
     id: 'research-placement',

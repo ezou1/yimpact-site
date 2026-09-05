@@ -3,14 +3,14 @@ import type { ButtonHTMLAttributes, MouseEvent, ReactNode } from 'react';
 export type ButtonVariant = 'primary' | 'secondary';
 
 const base =
-  'label inline-flex items-center justify-center gap-3 px-5 py-3.5 transition-colors duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500';
+  'haze-inner label inline-flex items-center justify-center gap-3 px-5 py-3.5 transition-colors duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500';
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary: 'bg-blue-700 text-white hover:bg-ink-900',
-  secondary: 'border border-ink-300 text-ink-900 hover:border-ink-900 hover:bg-ink-50',
+  secondary: 'border border-bar/45 text-ink-900 hover:border-bar hover:bg-ink-50',
 };
 
-const disabledClasses = 'border border-ink-100 bg-ink-50 text-ink-400 cursor-not-allowed';
+const disabledClasses = 'border border-bar/25 bg-ink-50 text-ink-400 cursor-not-allowed';
 
 // Use this to style a Link the same way as a Button. See Home.tsx.
 export function buttonClassNames(variant: ButtonVariant = 'primary', isDisabled = false): string {

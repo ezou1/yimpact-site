@@ -18,7 +18,7 @@ export function OrganizerCard({ organizer, size = 'md' }: OrganizerCardProps) {
 
   return (
     <div
-      className={`group flex h-full border border-ink-100 transition-colors duration-300 ease-out hover:border-ink-300 ${
+      className={`group flex h-full border border-bar/25 transition-colors duration-300 ease-out hover:border-bar/45 ${
         isWide ? 'flex-col sm:flex-row' : 'flex-col'
       }`}
     >
@@ -31,7 +31,7 @@ export function OrganizerCard({ organizer, size = 'md' }: OrganizerCardProps) {
       />
       <div
         className={`flex flex-1 flex-col gap-2 p-4 ${
-          isWide ? 'border-t border-ink-100 sm:border-l sm:border-t-0' : 'border-t border-ink-100'
+          isWide ? 'border-t border-bar/25 sm:border-l sm:border-t-0' : 'border-t border-bar/25'
         }`}
       >
         <div>

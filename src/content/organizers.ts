@@ -1,31 +1,43 @@
 import type { AdminOfficer, Organizer } from '../types/content';
 
-// Officers of the organization. They sit in the vertical admin panel on the
-// left of the Team page, above the Expo's own chain of responsibility.
+// Officers of the organization. They sit in the panel down the left of the
+// Team page, above the Expo's own chain of responsibility.
 export const adminOfficers: AdminOfficer[] = [
   {
-    id: 'ava-thompson',
-    name: 'Ava Thompson',
+    id: 'alex-chen',
+    name: 'Alex Chen',
     role: 'President',
     affiliation: "Yale '26, Political Science",
-    headshotUrl: '/headshots/ava-thompson.svg',
+    headshotUrl: '/headshots/alex-chen.svg',
+    bio: 'Alex holds the mandate for the organization and answers to the student body for how it spends its time. He argues, consistently, that a programme like this earns its place only by what it changes outside the gates.',
     email: 'president@yaleimpactexpo.org',
   },
   {
-    id: 'marcus-chen',
-    name: 'Marcus Chen',
+    id: 'michelle-jimenez',
+    name: 'Michelle Jimenez',
     role: 'Vice President',
     affiliation: "Yale '27, Economics",
-    headshotUrl: '/headshots/marcus-chen.svg',
+    headshotUrl: '/headshots/michelle-jimenez.svg',
+    bio: 'Michelle runs the organization day to day and keeps the Expo honest about who it is actually reaching. She built the outreach standard that sends recruiters to the schools and departments least likely to hear from us.',
     email: 'vicepresident@yaleimpactexpo.org',
   },
   {
-    id: 'elena-petrova',
-    name: 'Elena Petrova',
+    id: 'kyler-parker',
+    name: 'Kyler Parker',
     role: 'Chief Financial Officer',
     affiliation: "Yale '28, Applied Mathematics",
-    headshotUrl: '/headshots/elena-petrova.svg',
+    headshotUrl: '/headshots/kyler-parker.svg',
+    bio: 'Kyler holds the budget and decides what partner money is allowed to buy. Under his rule, funding buys visibility and access — never influence over a judging outcome or a track.',
     email: 'finance@yaleimpactexpo.org',
+  },
+  {
+    id: 'yafee-khan-business',
+    name: 'Yafee Khan',
+    role: 'Business Director',
+    affiliation: "Yale '26, Computer Science",
+    headshotUrl: '/headshots/yafee-khan.svg',
+    bio: 'Alongside chairing the Expo, Yafee handles the business side of the organization: partner agreements, the terms attached to funding, and the standing rule that a cheque never buys influence over a judging panel.',
+    email: 'business@yaleimpactexpo.org',
   },
 ];
 
@@ -33,15 +45,15 @@ export const adminOfficers: AdminOfficer[] = [
 // to the chair, and the leads who run the day-to-day work.
 export const organizers: Organizer[] = [
   {
-    id: 'jamal-whitfield',
-    name: 'Jamal Whitfield',
+    id: 'yafee-khan',
+    name: 'Yafee Khan',
     role: 'Chairman',
     rank: 'chair',
-    affiliation: "Yale '26, History",
-    headshotUrl: '/headshots/jamal-whitfield.svg',
-    bio: 'Jamal sets the direction of the Expo and answers for it. He chairs the executive council, holds the partner relationships, and keeps the programme accountable to the students it is built for.',
-    linkedinUrl: 'https://www.linkedin.com/in/jamal-whitfield',
-    email: 'chair@yaleimpactexpo.org',
+    affiliation: "Yale '26, Computer Science",
+    headshotUrl: '/headshots/yafee-khan.svg',
+    bio: 'Yafee founded the Expo on a simple conviction: the best thinking on this campus should end up somewhere it can do good. He chairs the council, holds the partner relationships, and keeps the programme pointed at impact rather than at its own prestige.',
+    linkedinUrl: 'https://www.linkedin.com/in/yafee-khan',
+    email: 'yafee.khan@yale.edu',
   },
   {
     id: 'priya-nair',
@@ -50,7 +62,7 @@ export const organizers: Organizer[] = [
     rank: 'executive',
     affiliation: "Yale '27, Global Affairs",
     headshotUrl: '/headshots/priya-nair.svg',
-    bio: 'Priya runs the semester: team formation, track structure, mentorship matching, and the judging rubric that keeps every project held to the same standard.',
+    bio: 'Priya runs the semester: team formation, track structure, mentorship matching, and a judging rubric that rewards genuine public benefit over polish.',
     email: 'programs@yaleimpactexpo.org',
   },
   {
@@ -60,7 +72,7 @@ export const organizers: Organizer[] = [
     rank: 'executive',
     affiliation: "Yale '28, Economics",
     headshotUrl: '/headshots/omar-haddad.svg',
-    bio: 'Omar builds the partner roster across all nine domains and protects the principle that no sponsor owns a track and no partner is priced out of the room.',
+    bio: 'Omar builds the partner roster across all nine domains and protects the principle that no sponsor owns a track and no community partner is priced out of the room.',
     linkedinUrl: 'https://www.linkedin.com/in/omar-haddad',
     email: 'partnerships@yaleimpactexpo.org',
   },
@@ -71,7 +83,7 @@ export const organizers: Organizer[] = [
     rank: 'executive',
     affiliation: "Yale '26, Computer Science",
     headshotUrl: '/headshots/grace-lin.svg',
-    bio: 'Grace leads the platform, the submission pipeline, and the tooling partnerships that put cloud credits and engineering help in the hands of every team that needs them.',
+    bio: 'Grace leads the platform and the tooling partnerships that put infrastructure in the hands of any team whose project needs it, at no cost to the student.',
     linkedinUrl: 'https://www.linkedin.com/in/grace-lin',
     email: 'tech@yaleimpactexpo.org',
   },
@@ -82,7 +94,7 @@ export const organizers: Organizer[] = [
     rank: 'executive',
     affiliation: "Yale '27, English",
     headshotUrl: '/headshots/lucia-ferreira.svg',
-    bio: 'Lucia edits everything the Expo publishes and makes sure student work reaches the readers, reporters, and practitioners who can carry it further.',
+    bio: 'Lucia edits The Impact Record and makes sure student work reaches the practitioners, reporters, and communities who can act on it.',
     email: 'press@yaleimpactexpo.org',
   },
   {
@@ -102,7 +114,7 @@ export const organizers: Organizer[] = [
     rank: 'team',
     affiliation: "Yale '27, Cognitive Science",
     headshotUrl: '/headshots/sofia-kim.svg',
-    bio: 'Sofia recruits across every school and department, with a standing brief to reach students who have no existing route into labs, firms, or funding.',
+    bio: 'Sofia recruits across every school and department, with a standing brief to reach students who would never otherwise hear about a programme like this.',
     email: 'outreach@yaleimpactexpo.org',
   },
   {
@@ -112,7 +124,7 @@ export const organizers: Organizer[] = [
     rank: 'team',
     affiliation: "Yale '27, Sociology",
     headshotUrl: '/headshots/noah-fitzgerald.svg',
-    bio: 'Noah is the link to New Haven: he brings community organizations to the table early and keeps local projects answerable to local needs.',
+    bio: 'Noah is the link to New Haven. He brings community organizations in early and keeps local projects answerable to the people they claim to serve.',
     email: 'community@yaleimpactexpo.org',
   },
   {

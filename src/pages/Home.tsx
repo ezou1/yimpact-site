@@ -36,9 +36,10 @@ export function Home() {
   const latestPosts = postsByDate.slice(0, 3);
 
   return (
-    <Layout title="Yale Impact Expo" description={event.tagline}>
+    <Layout pattern="home" title="Yale Impact Expo" description={event.tagline}>
       {/* The title screen keeps its air. Everything below it runs tighter. */}
-      <div className="mx-auto max-w-[1200px] px-6 pb-20 pt-16 md:px-10 md:pb-28 md:pt-32">
+      <div className="mx-auto max-w-[1200px] px-4 pb-6 pt-6 sm:px-6 md:px-10 md:pb-10 md:pt-12">
+        <div className="haze px-5 py-12 sm:px-7 md:px-12 md:py-20">
         <Reveal>
           <p className="label text-ink-400">
             {event.dateLabel}
@@ -58,27 +59,29 @@ export function Home() {
             </a>
           </div>
           <p className="mt-5 max-w-[54ch] text-sm leading-[1.55] text-ink-400">
-            Students: watch the two-minute walkthrough and apply. Sponsors: write to us and we will send the partner
-            brief for your domain.
+            Students: watch the walkthrough and bring a problem worth a semester. Sponsors: write to us and we will
+            send the partner brief for your domain.
           </p>
         </Reveal>
+        </div>
       </div>
 
-      <Section index="01" eyebrow="Mission" heading="Opportunity, made something you can earn">
+      <Section index="01" eyebrow="Mission" heading="Work that leaves the building">
         <div className="grid gap-8 md:grid-cols-2">
           <div className="space-y-4 text-base leading-[1.6] text-ink-700">
             <p>{event.mission}</p>
             <p>
-              Every year a great deal of serious thinking at Yale stops at the end of a seminar, because the student
-              who did it had no route to a lab, a firm, a funder, or an agency who could carry it further. Some
-              students arrive already holding those connections. Most do not.
+              Every year a great deal of serious thinking at Yale stops at the end of a seminar. A bias study nobody
+              acts on. A housing analysis the city never sees. A tool that would help a clinic, sitting in a
+              repository. The waste is not of student potential — it is of the good that work could have done.
             </p>
             <p>
-              The Expo is our attempt to close that gap in the fairest way we know: put the work in front of the
-              people who can advance it, and let its quality do the arguing.
+              So the Expo is built around a single question, asked of every project: who is better off if this
+              succeeds? Teams answer it in week one and are held to that answer in front of a judging panel that
+              includes the people they claim to serve.
             </p>
           </div>
-          <ul className="grid grid-cols-2 gap-px self-start border border-ink-100 bg-ink-100">
+          <ul className="haze-inner grid grid-cols-2 gap-px self-start overflow-hidden border border-bar/25 bg-bar/25">
             {[
               { figure: '8', label: 'Project tracks' },
               { figure: '9', label: 'Partner domains' },
@@ -97,10 +100,10 @@ export function Home() {
       <Section
         index="02"
         eyebrow="Tracks"
-        heading="Eight tracks, and none of them require code"
-        intro="Tracks organize judging, mentorship, and partner placement. A team might build an AI tool, audit an algorithm, write a policy memo, design a health intervention, or draft a New Haven pilot plan."
+        heading="Eight tracks, one question"
+        intro="Tracks organize judging, mentorship, and partner placement. A team might build an AI tool, audit an algorithm, write a policy memo, design a health intervention, or draft a New Haven pilot plan. Whatever the form, the standard is the same: research-backed, ethical, feasible, and pointed at genuine public benefit."
       >
-        <ul className="grid gap-px border border-ink-100 bg-ink-100 sm:grid-cols-2">
+        <ul className="haze-inner grid gap-px overflow-hidden border border-bar/25 bg-bar/25 sm:grid-cols-2">
           {tracks.map((track) => (
             <li key={track.id} className="bg-white p-5">
               <h3 className="text-base font-medium leading-[1.25] tracking-[-0.028em] text-ink-900">{track.name}</h3>
@@ -113,15 +116,15 @@ export function Home() {
 
       <Section
         index="03"
-        eyebrow="Awards"
-        heading="We compete on opportunity, not prize money"
-        intro="A cheque is spent by June. An introduction to the lab, the firm, or the agency that can carry your work forward changes what you are able to do next."
+        eyebrow="Pathways"
+        heading="We strive to empower change"
+        intro="Good work should not die at the closing reception. So we push opportunities toward the teams who can further these missions — funding, placements, legal support, pilots. Those doors advance careers too, and that is a welcome bonus. It is not the point."
       >
-        <ul className="border-t border-ink-100">
+        <ul className="border-t border-bar/25">
           {pathways.map((pathway, index) => (
             <li
               key={pathway.id}
-              className="grid gap-1 border-b border-ink-100 py-3.5 sm:grid-cols-[40px_200px_minmax(0,1fr)] sm:gap-6"
+              className="grid gap-1 border-b border-bar/25 py-3.5 sm:grid-cols-[40px_200px_minmax(0,1fr)] sm:gap-6"
             >
               <span className="label text-ink-300">{String(index + 1).padStart(2, '0')}</span>
               <span className="text-base leading-[1.4] tracking-[-0.025em] text-ink-900">{pathway.name}</span>
@@ -137,7 +140,7 @@ export function Home() {
             <li key={domain}>
               <Link
                 to="/sponsors"
-                className="label inline-block border border-ink-100 px-3 py-2 text-ink-500 transition-colors duration-300 ease-out hover:border-ink-900 hover:text-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+                className="label inline-block border border-bar/25 px-3 py-2 text-ink-500 transition-colors duration-300 ease-out hover:border-bar hover:text-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
               >
                 {domainLabels[domain]}
               </Link>
@@ -174,11 +177,11 @@ export function Home() {
         </p>
       </Section>
 
-      <Section index="07" eyebrow="Blog" heading="From the newsroom">
+      <Section index="07" eyebrow="The Impact Record" heading="From the newsroom">
         <ul className="grid gap-6 md:grid-cols-3">
           {latestPosts.map((post) => (
             <li key={post.slug}>
-              <article className="border-t border-ink-100 pt-4">
+              <article className="border-t border-bar/25 pt-4">
                 <p className="label text-ink-400">{post.kicker}</p>
                 <h3 className="mt-2 text-base font-medium leading-[1.25] tracking-[-0.03em] text-ink-900">
                   <Link
@@ -201,9 +204,9 @@ export function Home() {
       </Section>
 
       <Section index="08" eyebrow="FAQ" heading="Questions">
-        <div className="border-t border-ink-100">
+        <div className="border-t border-bar/25">
           {faq.map((item) => (
-            <details key={item.id} className="group border-b border-ink-100 py-4">
+            <details key={item.id} className="group border-b border-bar/25 py-4">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-base leading-[1.4] tracking-[-0.025em] text-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500">
                 {item.question}
                 <ChevronDown
@@ -218,11 +221,12 @@ export function Home() {
       </Section>
 
       <Section index="09" eyebrow="Contact" heading="Get in touch">
-        <div className="grid gap-6 border-t border-ink-100 pt-6 sm:grid-cols-2">
+        <div className="grid gap-6 border-t border-bar/25 pt-6 sm:grid-cols-2">
           <div>
             <p className="label text-ink-400">Students</p>
             <p className="mt-2 max-w-[46ch] text-sm leading-[1.6] text-ink-700">
-              Start with the walkthrough, then write to us with anything the FAQ does not answer.
+              Bring a problem you cannot stop thinking about. Start with the walkthrough, then write to us with
+              anything the FAQ does not answer.
             </p>
             <Link to="/students" className={`${buttonClassNames('secondary')} mt-4`}>
               How to get involved
@@ -232,7 +236,7 @@ export function Home() {
             <p className="label text-ink-400">Sponsors and partners</p>
             <p className="mt-2 max-w-[46ch] text-sm leading-[1.6] text-ink-700">
               Tell us your domain and we will send the partner brief, the judging model, and the track placements
-              still open.
+              still open. Partnership here is measured by what it makes possible, not by the size of the cheque.
             </p>
             <a href={`mailto:${event.sponsorEmail}`} className={`${buttonClassNames('primary')} mt-4`}>
               {event.sponsorEmail}

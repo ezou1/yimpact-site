@@ -24,7 +24,7 @@ export function Byline({ post, className = '' }: { post: BlogPost; className?: s
 // clause the way a front page carries a lede.
 export function LeadStory({ post }: { post: BlogPost }) {
   return (
-    <article className="border-b border-ink-100 pb-10">
+    <article className="border-b border-bar/25 pb-10">
       <p className="label text-blue-500">{post.kicker}</p>
       <h2 className="display-2 mt-3 max-w-[24ch]">
         <Link
@@ -43,7 +43,7 @@ export function LeadStory({ post }: { post: BlogPost }) {
 // A story in the ruled river below the lead.
 export function PostCard({ post }: { post: BlogPost }) {
   return (
-    <article className="flex h-full flex-col border-t border-ink-100 pt-4">
+    <article className="flex h-full flex-col border-t border-bar/25 pt-4">
       <p className="label text-ink-400">{post.kicker}</p>
       <h3 className="mt-2 text-lg font-medium leading-[1.2] tracking-[-0.032em] text-ink-900">
         <Link
@@ -63,12 +63,12 @@ export function PostCard({ post }: { post: BlogPost }) {
 export function LatestRail({ posts }: { posts: BlogPost[] }) {
   return (
     <aside aria-labelledby="latest-heading" className="lg:sticky lg:top-24 lg:self-start">
-      <h2 id="latest-heading" className="label border-b border-ink-100 pb-3 text-ink-900">
+      <h2 id="latest-heading" className="label border-b border-bar/25 pb-3 text-ink-900">
         Latest
       </h2>
       <ul>
         {posts.map((post) => (
-          <li key={post.slug} className="border-b border-ink-100">
+          <li key={post.slug} className="border-b border-bar/25">
             <Link
               to={`/blog/${post.slug}`}
               className="group block py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
