@@ -6,6 +6,18 @@ import type { Member } from '../components/MemberTile';
 import { AdminPanel } from '../components/AdminPanel';
 import { adminOfficers, organizers } from '../content/organizers';
 
+// Members fill a row up to this many, then a new row is spawned. Every row is
+// centred, so the group stays symmetric however many people are in it.
+const PER_ROW = 3;
+
+function intoRows(members: Member[]): Member[][] {
+  const rows: Member[][] = [];
+  for (let index = 0; index < members.length; index += PER_ROW) {
+    rows.push(members.slice(index, index + PER_ROW));
+  }
+  return rows;
+}
+
 export function Team() {
   const [openId, setOpenId] = useState<string | null>(null);
 
@@ -13,9 +25,7 @@ export function Team() {
   const executive = organizers.filter((organizer) => organizer.rank === 'executive');
   const leads = organizers.filter((organizer) => organizer.rank === 'team');
 
-  // Every rank is one centred row, so the chair sits on the axis of symmetry
-  // and the pyramid widens beneath him.
-  const rows: { key: string; label: string; note: string; members: Member[] }[] = [
+  const groups: { key: string; label: string; note: string; members: Member[] }[] = [
     { key: 'chair', label: 'Chair', note: 'Sets direction and answers for the programme', members: chair },
     {
       key: 'executive',
@@ -36,56 +46,62 @@ export function Team() {
       title="Team · Yale Impact Expo"
       description="The students who run the Yale Impact Expo, and the officers of the organization behind it."
     >
-      <div className="mx-auto max-w-[1520px] px-4 py-6 sm:px-6 md:px-10 md:py-10">
+      <div className="mx-auto max-w-[1200px] px-4 py-6 sm:px-6 md:px-10 md:py-10">
         <div className="haze px-5 py-8 sm:px-7 md:px-10 md:py-12">
-        <Reveal>
-          <h1 className="display-2">
-            The Impact Expo <span className="accent-serif">Team</span>
-          </h1>
-        </Reveal>
+          <Reveal>
+            <h1 className="display-2">
+              The Impact Expo <span className="accent-serif">Team</span>
+            </h1>
+          </Reveal>
 
-        <div className="mt-10 grid gap-10 2xl:grid-cols-[200px_minmax(0,1fr)] 2xl:gap-10">
-          <AdminPanel officers={adminOfficers} openId={openId} onToggle={toggle} />
+          <div className="mt-10 grid gap-10 xl:grid-cols-[200px_minmax(0,1fr)] xl:gap-10">
+            <AdminPanel officers={adminOfficers} openId={openId} onToggle={toggle} />
 
-          <div>
-            <div className="border-b border-bar/25 pb-3">
-              <h2 className="display-2">Expo team</h2>
-            </div>
+            <div>
+              <div className="border-b border-bar/25 pb-3">
+                <h2 className="display-2">Expo team</h2>
+              </div>
 
-            <div className="mt-8 space-y-8">
-              {rows.map((row, rowIndex) => {
-                const openMember = row.members.find((member) => member.id === openId);
-                return (
-                  <Reveal key={row.key}>
-                    <section aria-labelledby={`rank-${row.key}`}>
-                      <p id={`rank-${row.key}`} className="label text-center text-ink-400">
-                        <span className="text-blue-500">{String(rowIndex + 1).padStart(2, '0')}</span>
+              <div className="mt-8 space-y-8">
+                {groups.map((group, groupIndex) => (
+                  <Reveal key={group.key}>
+                    <section aria-labelledby={`rank-${group.key}`}>
+                      <p id={`rank-${group.key}`} className="label text-center text-ink-400">
+                        <span className="text-blue-500">{String(groupIndex + 1).padStart(2, '0')}</span>
                         <span className="px-2 text-ink-300">/</span>
-                        {row.label}
+                        {group.label}
                       </p>
-                      <p className="mt-1.5 text-center text-xs text-ink-400">{row.note}</p>
+                      <p className="mt-1.5 text-center text-xs text-ink-400">{group.note}</p>
 
-                      <ul className="mt-4 flex flex-wrap justify-center gap-3">
-                        {row.members.map((member) => (
-                          <li key={member.id}>
-                            <MemberChip
-                              member={member}
-                              isOpen={openId === member.id}
-                              onToggle={() => toggle(member.id)}
-                              panelId={`member-panel-${row.key}`}
-                            />
-                          </li>
-                        ))}
-                      </ul>
-
-                      {openMember ? <MemberPanel member={openMember} id={`member-panel-${row.key}`} /> : null}
+                      <div className="mt-4 space-y-4">
+                        {intoRows(group.members).map((row, rowIndex) => {
+                          const openMember = row.find((member) => member.id === openId);
+                          const panelId = `member-panel-${group.key}-${rowIndex}`;
+                          return (
+                            <div key={panelId}>
+                              <ul className="flex flex-wrap justify-center gap-4">
+                                {row.map((member) => (
+                                  <li key={member.id}>
+                                    <MemberChip
+                                      member={member}
+                                      isOpen={openId === member.id}
+                                      onToggle={() => toggle(member.id)}
+                                      panelId={panelId}
+                                    />
+                                  </li>
+                                ))}
+                              </ul>
+                              {openMember ? <MemberPanel member={openMember} id={panelId} /> : null}
+                            </div>
+                          );
+                        })}
+                      </div>
                     </section>
                   </Reveal>
-                );
-              })}
+                ))}
+              </div>
             </div>
           </div>
-        </div>
         </div>
       </div>
     </Layout>
