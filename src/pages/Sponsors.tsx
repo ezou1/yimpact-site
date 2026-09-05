@@ -1,100 +1,90 @@
 import { useMemo, useState } from 'react';
 import { Layout } from '../components/layout/Layout';
+import { PageHeader } from '../components/ui/PageHeader';
+import { Reveal } from '../components/ui/Reveal';
 import { SponsorCard } from '../components/SponsorCard';
-import { sponsors } from '../content/sponsors';
-import type { Sector } from '../types/content';
+import { DomainNav } from '../components/DomainNav';
+import type { DomainFilter } from '../components/DomainNav';
+import { domainLabels, domainOrder, domainSummaries, sponsors } from '../content/sponsors';
+import { event } from '../content/event';
+import { buttonClassNames } from '../components/ui/Button';
+import type { Domain } from '../types/content';
 
-const sectorOrder: Sector[] = ['nonprofit', 'government', 'defense', 'ai-research', 'academia', 'industry'];
-
-const sectorLabels: Record<Sector, string> = {
-  nonprofit: 'Nonprofit',
-  government: 'Government',
-  defense: 'Defense',
-  'ai-research': 'AI research',
-  academia: 'Academia',
-  industry: 'Industry',
-};
-
-type SectorFilter = Sector | 'all';
+const counts = domainOrder.reduce(
+  (acc, domain) => {
+    acc[domain] = sponsors.filter((sponsor) => sponsor.domain === domain).length;
+    return acc;
+  },
+  {} as Record<Domain, number>,
+);
 
 export function Sponsors() {
-  const [activeSector, setActiveSector] = useState<SectorFilter>('all');
-  const showFilter = sponsors.length >= 12;
+  const [activeDomain, setActiveDomain] = useState<DomainFilter>('all');
 
-  const visibleSponsors = useMemo(
-    () => (activeSector === 'all' ? sponsors : sponsors.filter((sponsor) => sponsor.sector === activeSector)),
-    [activeSector],
+  // A domain with no partners yet must not render an empty heading.
+  const groups = useMemo(
+    () =>
+      domainOrder
+        .filter((domain) => activeDomain === 'all' || domain === activeDomain)
+        .map((domain) => ({ domain, items: sponsors.filter((sponsor) => sponsor.domain === domain) }))
+        .filter((group) => group.items.length > 0),
+    [activeDomain],
   );
-
-  // A sector with zero sponsors must not render, so this list drops empty groups.
-  const groups = sectorOrder
-    .map((sector) => ({
-      sector,
-      items: visibleSponsors.filter((sponsor) => sponsor.sector === sector),
-    }))
-    .filter((group) => group.items.length > 0);
 
   return (
     <Layout
-      title="Sponsors · Yale Impact Exposition"
-      description="Meet the sponsors of the Yale Impact Exposition, grouped by sector."
+      title="Partners · Yale Impact Expo"
+      description="The partners of the Yale Impact Expo, across nine domains — corporate, government, law, tech, entrepreneurship, academia, philanthropy, sustainability, and healthcare."
     >
-      <div className="mx-auto max-w-[1120px] px-6 py-16 md:px-12 md:py-24">
-        <h1 className="text-[32px] font-semibold text-ink-900">Sponsors</h1>
-        <p className="mt-2 text-base text-ink-700">{sponsors.length} organizations support the event.</p>
+      <PageHeader
+        eyebrow={`${sponsors.length} partners · 9 domains`}
+        title="Partners"
+        meta="Corporate partners fund the Expo. Academic, civic, and community partners make it credible. No partner owns a track, every partner may judge, and organizations that contribute expertise rather than money are never priced out of the room."
+      />
 
-        {showFilter ? (
-          <div role="group" aria-label="Filter sponsors by sector" className="mt-8 flex flex-wrap gap-2">
-            <FilterButton label="All sectors" active={activeSector === 'all'} onClick={() => setActiveSector('all')} />
-            {sectorOrder.map((sector) => (
-              <FilterButton
-                key={sector}
-                label={sectorLabels[sector]}
-                active={activeSector === sector}
-                onClick={() => setActiveSector(sector)}
-              />
-            ))}
-          </div>
-        ) : null}
+      <DomainNav active={activeDomain} counts={counts} onSelect={setActiveDomain} total={sponsors.length} />
 
-        <div className="mt-12 space-y-16">
-          {groups.map((group) => (
-            <section key={group.sector} aria-labelledby={`sector-${group.sector}`}>
-              <h2 id={`sector-${group.sector}`} className="text-2xl font-semibold text-ink-900">
-                {sectorLabels[group.sector]}
-              </h2>
-              <ul className="mt-6 grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-6">
+      <div className="mx-auto max-w-[1200px] px-6 pb-20 md:px-10">
+        {groups.map((group, groupIndex) => (
+          <section key={group.domain} aria-labelledby={`domain-${group.domain}`} className="pt-12">
+            <Reveal>
+              <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-ink-100 pb-3">
+                <h2 id={`domain-${group.domain}`} className="display-2">
+                  {domainLabels[group.domain]}
+                </h2>
+                <p className="label text-ink-400">
+                  <span className="text-blue-500">{String(groupIndex + 1).padStart(2, '0')}</span>
+                  <span className="px-2 text-ink-300">/</span>
+                  {String(group.items.length).padStart(2, '0')} partners
+                </p>
+              </div>
+              <p className="mt-4 max-w-[68ch] text-sm leading-[1.6] text-ink-500">
+                {domainSummaries[group.domain]}
+              </p>
+              <ul className="mt-6 grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-4">
                 {group.items.map((sponsor) => (
                   <li key={sponsor.id}>
                     <SponsorCard sponsor={sponsor} />
                   </li>
                 ))}
               </ul>
-            </section>
-          ))}
+            </Reveal>
+          </section>
+        ))}
+
+        <div className="mt-16 border-t border-ink-100 pt-8">
+          <h2 className="display-2 max-w-[20ch]">
+            Your organization belongs on this <span className="accent-serif">page</span>
+          </h2>
+          <p className="mt-4 max-w-[62ch] text-base leading-[1.6] text-ink-700">
+            Tell us which of the nine domains you sit in, and we will send the partner brief, the judging model, and
+            the track placements still open for the coming Expo.
+          </p>
+          <a href={`mailto:${event.sponsorEmail}`} className={`${buttonClassNames('primary')} mt-6`}>
+            {event.sponsorEmail}
+          </a>
         </div>
       </div>
     </Layout>
-  );
-}
-
-interface FilterButtonProps {
-  label: string;
-  active: boolean;
-  onClick: () => void;
-}
-
-function FilterButton({ label, active, onClick }: FilterButtonProps) {
-  return (
-    <button
-      type="button"
-      aria-pressed={active}
-      onClick={onClick}
-      className={`rounded-full border px-4 py-2 text-sm font-semibold transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 ${
-        active ? 'border-blue-700 bg-blue-700 text-white' : 'border-ink-100 bg-white text-ink-700 hover:border-blue-500'
-      }`}
-    >
-      {label}
-    </button>
   );
 }

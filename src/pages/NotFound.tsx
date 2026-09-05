@@ -4,12 +4,16 @@ import { buttonClassNames } from '../components/ui/Button';
 
 export function NotFound() {
   return (
-    <Layout title="Page not found · Yale Impact Exposition" description="This page does not exist.">
-      <div className="mx-auto flex max-w-[720px] flex-col items-center px-6 py-24 text-center md:px-12">
-        <p className="text-xs font-semibold uppercase tracking-[0.08em] text-blue-500">Error 404</p>
-        <h1 className="mt-2 text-[32px] font-semibold text-ink-900">This page does not exist.</h1>
-        <p className="mt-4 text-base leading-[1.7] text-ink-700">The page moved, or the address is wrong.</p>
-        <Link to="/" className={`${buttonClassNames('primary')} mt-8`}>
+    <Layout title="Page not found · Yale Impact Expo" description="This page does not exist.">
+      <div className="mx-auto max-w-[1200px] px-6 py-24 md:px-10 md:py-32">
+        <p className="label text-ink-400">Error 404</p>
+        <h1 className="display-1 mt-5 max-w-[16ch]">
+          This page does not <span className="accent-serif">exist</span>.
+        </h1>
+        <p className="mt-6 max-w-[46ch] text-base leading-[1.6] text-ink-500">
+          The page moved, or the address is wrong.
+        </p>
+        <Link to="/" className={`${buttonClassNames('secondary')} mt-8`}>
           Go to the home page
         </Link>
       </div>

@@ -1,42 +1,42 @@
 import type { Sponsor } from '../types/content';
-import { Card } from './ui/Card';
-import { Badge } from './ui/Badge';
 
 interface SponsorCardProps {
   sponsor: Sponsor;
 }
 
 const tierLabel: Record<Sponsor['tier'], string> = {
-  lead: 'Lead sponsor',
+  lead: 'Lead',
   partner: 'Partner',
-  supporting: 'Supporting sponsor',
+  supporting: 'Supporting',
 };
 
 export function SponsorCard({ sponsor }: SponsorCardProps) {
   return (
-    <Card className="flex h-full flex-col gap-4">
-      <img
-        src={sponsor.logoUrl}
-        alt={sponsor.name}
-        width={64}
-        height={64}
-        className="rounded-[var(--radius-control)]"
-      />
-      <div>
-        <h3 className="text-lg font-semibold text-ink-900">{sponsor.name}</h3>
-        <Badge className="mt-2">{tierLabel[sponsor.tier]}</Badge>
+    <div className="group flex h-full flex-col border border-ink-100 transition-colors duration-300 ease-out hover:border-ink-300">
+      <div className="flex items-center justify-between gap-3 border-b border-ink-100 p-4">
+        <img
+          src={sponsor.logoUrl}
+          alt={sponsor.name}
+          width={40}
+          height={40}
+          className="grayscale transition-[filter] duration-500 ease-out group-hover:grayscale-0"
+        />
+        <span className="label text-ink-400">{tierLabel[sponsor.tier]}</span>
       </div>
-      {sponsor.blurb ? <p className="text-base leading-[1.7] text-ink-700">{sponsor.blurb}</p> : null}
-      {sponsor.websiteUrl ? (
-        <a
-          href={sponsor.websiteUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-auto text-sm font-semibold text-blue-500 hover:text-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
-        >
-          Visit website
-        </a>
-      ) : null}
-    </Card>
+      <div className="flex flex-1 flex-col gap-2 p-4">
+        <h3 className="text-base font-medium leading-[1.25] tracking-[-0.028em] text-ink-900">{sponsor.name}</h3>
+        {sponsor.blurb ? <p className="text-sm leading-[1.55] text-ink-500">{sponsor.blurb}</p> : null}
+        {sponsor.websiteUrl ? (
+          <a
+            href={sponsor.websiteUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="label mt-auto pt-2 text-ink-400 transition-colors duration-300 ease-out hover:text-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500"
+          >
+            Website →
+          </a>
+        ) : null}
+      </div>
+    </div>
   );
 }

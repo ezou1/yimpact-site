@@ -1,27 +1,44 @@
 import type { ReactNode } from 'react';
+import { Reveal } from './Reveal';
 
 interface SectionProps {
   id?: string;
+  index?: string; // A two-digit figure, printed in the label column. Example: "01".
   eyebrow?: string;
   heading?: string;
-  band?: boolean;
+  intro?: string;
   children: ReactNode;
   className?: string;
 }
 
-export function Section({ id, eyebrow, heading, band = false, children, className = '' }: SectionProps) {
+// A section is separated from the one above it by a hairline, never by a
+// filled band. The label sits in its own column and holds while the body
+// scrolls past it.
+export function Section({ id, index, eyebrow, heading, intro, children, className = '' }: SectionProps) {
+  const hasLabelColumn = Boolean(index || eyebrow);
+
   return (
-    <section id={id} className={`py-16 md:py-24 ${band ? 'bg-ink-50' : 'bg-white'} ${className}`}>
-      <div className="mx-auto max-w-[1120px] px-6 md:px-12">
-        {eyebrow ? (
-          <p className="text-xs font-semibold uppercase tracking-[0.08em] text-blue-500">{eyebrow}</p>
-        ) : null}
-        {heading ? (
-          <h2 className={`text-2xl font-semibold text-ink-900 md:text-[32px] ${eyebrow ? 'mt-2' : ''}`}>
-            {heading}
-          </h2>
-        ) : null}
-        <div className={heading || eyebrow ? 'mt-8' : ''}>{children}</div>
+    <section id={id} className={`border-t border-ink-100 ${className}`}>
+      <div className="mx-auto max-w-[1200px] px-6 md:px-10">
+        <div className="grid gap-6 py-12 md:grid-cols-[140px_minmax(0,1fr)] md:gap-12 md:py-16">
+          <div className="md:sticky md:top-24 md:self-start">
+            {hasLabelColumn ? (
+              <p className="label text-ink-400">
+                {index ? <span className="text-blue-500">{index}</span> : null}
+                {index && eyebrow ? <span className="px-2 text-ink-300">/</span> : null}
+                {eyebrow}
+              </p>
+            ) : null}
+          </div>
+
+          <div>
+            <Reveal>
+              {heading ? <h2 className="display-2">{heading}</h2> : null}
+              {intro ? <p className="mt-4 max-w-[62ch] text-base leading-[1.6] text-ink-700">{intro}</p> : null}
+              <div className={heading || intro ? 'mt-8' : ''}>{children}</div>
+            </Reveal>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -1,31 +1,33 @@
 import { NavLink } from 'react-router-dom';
 
 const navItems = [
-  { to: '/sponsors', label: 'Sponsors' },
+  { to: '/sponsors', label: 'Partners' },
+  { to: '/students', label: 'Students' },
   { to: '/team', label: 'Team' },
   { to: '/schedule', label: 'Schedule' },
+  { to: '/blog', label: 'Blog' },
   { to: '/login', label: 'Log in' },
 ];
 
 export function Header() {
   return (
-    <header className="border-b border-ink-100 bg-white">
-      <div className="mx-auto flex max-w-[1120px] flex-wrap items-center justify-between gap-4 px-6 py-4 md:px-12">
+    <header className="sticky top-0 z-40 border-b border-ink-100 bg-white/85 backdrop-blur-md">
+      <div className="mx-auto flex h-[calc(var(--header-h)-1px)] max-w-[1200px] items-center justify-between gap-6 px-6 md:px-10">
         <NavLink
           to="/"
-          className="rounded-[var(--radius-control)] text-base font-semibold text-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+          className="shrink-0 text-base font-medium tracking-[-0.035em] text-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500"
         >
-          Yale Impact Exposition
+          Yale Impact <span className="accent-serif">Expo</span>
         </NavLink>
-        <nav aria-label="Main">
-          <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
+        <nav aria-label="Main" className="min-w-0">
+          <ul className="flex items-center gap-x-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {navItems.map((item) => (
-              <li key={item.to}>
+              <li key={item.to} className="shrink-0">
                 <NavLink
                   to={item.to}
                   className={({ isActive }) =>
-                    `rounded-[var(--radius-control)] text-sm font-semibold transition-colors duration-200 hover:text-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 ${
-                      isActive ? 'text-blue-700' : 'text-ink-700'
+                    `label transition-colors duration-300 ease-out hover:text-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500 ${
+                      isActive ? 'text-ink-900' : 'text-ink-400'
                     }`
                   }
                 >

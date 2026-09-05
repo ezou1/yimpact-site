@@ -1,17 +1,22 @@
-export type Sector =
-  | 'nonprofit'
+// The nine partner domains, in the order they appear across the top of the
+// Sponsors page.
+export type Domain =
+  | 'corporate'
   | 'government'
-  | 'defense'
-  | 'ai-research'
+  | 'law'
+  | 'tech'
+  | 'entrepreneurship'
   | 'academia'
-  | 'industry';
+  | 'philanthropy'
+  | 'sustainability'
+  | 'healthcare';
 
 export type SponsorTier = 'lead' | 'partner' | 'supporting';
 
 export interface Sponsor {
   id: string;
   name: string;
-  sector: Sector;
+  domain: Domain;
   tier: SponsorTier;
   logoUrl: string;
   websiteUrl?: string;
@@ -19,14 +24,30 @@ export interface Sponsor {
   featured: boolean; // True if the home page shows this sponsor.
 }
 
+// The Expo team runs in three ranks, plus the standing officers of the
+// organization who sit in the admin panel on the Team page.
+export type OrganizerRank = 'chair' | 'executive' | 'team';
+
 export interface Organizer {
   id: string;
   name: string;
-  role: string; // Example: "Logistics Lead"
+  role: string; // Example: "Executive Director, Partnerships"
+  rank: OrganizerRank;
   affiliation?: string; // Example: "Yale '27, Computer Science"
   headshotUrl: string;
   bio: string;
   linkedinUrl?: string;
+  email?: string;
+}
+
+// Officers of the organization rather than of the Expo itself. These appear
+// in the vertical panel on the left of the Team page.
+export interface AdminOfficer {
+  id: string;
+  name: string;
+  role: string; // Example: "President"
+  affiliation?: string;
+  headshotUrl: string;
   email?: string;
 }
 
@@ -46,13 +67,48 @@ export interface FaqItem {
   answer: string;
 }
 
+// A project track. Tracks organize judging, mentorship, partner placement,
+// and opportunity pathways.
+export interface Track {
+  id: string;
+  name: string;
+  focus: string;
+  examples: string;
+}
+
+// One of the routes a strong team can take out of the Expo.
+export interface Pathway {
+  id: string;
+  name: string;
+  summary: string;
+}
+
+export type BlogCategory = 'Campus' | 'Partners' | 'Research' | 'New Haven' | 'Opinion' | 'Announcements';
+
+export interface BlogPost {
+  slug: string;
+  title: string;
+  category: BlogCategory;
+  kicker: string; // The short line above the headline. Example: "Expo 2026".
+  publishedAt: string; // ISO 8601
+  author: string;
+  authorRole: string;
+  excerpt: string;
+  body: string[]; // One string per paragraph.
+  lead: boolean; // True for the story that leads the Blog page.
+}
+
 export interface EventDetails {
   name: string;
+  shortName: string;
   tagline: string;
+  mission: string;
+  dateLabel: string; // Shown to readers. The team sets a firm date later.
   startsAt: string;
   endsAt: string;
   venueName: string;
   venueAddress: string;
   mapUrl?: string;
   contactEmail: string;
+  sponsorEmail: string;
 }

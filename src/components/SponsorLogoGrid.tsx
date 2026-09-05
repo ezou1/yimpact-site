@@ -1,37 +1,32 @@
-import type { Sponsor, SponsorTier } from '../types/content';
+import type { Sponsor } from '../types/content';
 
 interface SponsorLogoGridProps {
   sponsors: Sponsor[];
 }
 
-const sizeByTier: Record<SponsorTier, number> = {
-  lead: 96,
-  partner: 72,
-  supporting: 56,
-};
-
+// A ruled grid. Each logo sits in its own cell and the hairlines between the
+// cells carry the structure.
 export function SponsorLogoGrid({ sponsors }: SponsorLogoGridProps) {
   return (
-    <ul className="flex flex-wrap items-center justify-center gap-8">
+    <ul className="grid grid-cols-2 gap-px border border-ink-100 bg-ink-100 sm:grid-cols-3 lg:grid-cols-5">
       {sponsors.map((sponsor) => {
-        const size = sizeByTier[sponsor.tier];
         const logo = (
           <img
             src={sponsor.logoUrl}
             alt={sponsor.name}
-            width={size}
-            height={size}
-            className="rounded-[var(--radius-control)]"
+            width={48}
+            height={48}
+            className="grayscale transition-[filter] duration-500 ease-out group-hover:grayscale-0"
           />
         );
         return (
-          <li key={sponsor.id}>
+          <li key={sponsor.id} className="group flex aspect-[3/2] items-center justify-center bg-white p-4">
             {sponsor.websiteUrl ? (
               <a
                 href={sponsor.websiteUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="block rounded-[var(--radius-control)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+                className="flex focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500"
               >
                 {logo}
               </a>

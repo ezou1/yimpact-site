@@ -4,52 +4,35 @@ interface EventDetailsBlockProps {
   event: EventDetails;
 }
 
-const dateFormatter = new Intl.DateTimeFormat('en-US', {
-  weekday: 'long',
-  month: 'long',
-  day: 'numeric',
-  year: 'numeric',
-});
-
-const timeFormatter = new Intl.DateTimeFormat('en-US', {
-  hour: 'numeric',
-  minute: '2-digit',
-});
-
 export function EventDetailsBlock({ event }: EventDetailsBlockProps) {
-  const start = new Date(event.startsAt);
-  const end = new Date(event.endsAt);
+  const rows = [
+    { term: 'When', value: event.dateLabel },
+    { term: 'Where', value: `${event.venueName} · ${event.venueAddress}` },
+    { term: 'Who', value: 'Every Yale student, from every school and every year. Free to take part.' },
+    { term: 'Partners', value: 'Nine domains, from corporate and government to philanthropy and healthcare.' },
+  ];
 
   return (
-    <div className="rounded-[var(--radius-card)] border border-ink-100 p-8">
-      <dl className="grid gap-6 sm:grid-cols-2">
-        <div>
-          <dt className="text-xs font-semibold uppercase tracking-[0.08em] text-ink-500">Date</dt>
-          <dd className="mt-1 text-base text-ink-900">{dateFormatter.format(start)}</dd>
-        </div>
-        <div>
-          <dt className="text-xs font-semibold uppercase tracking-[0.08em] text-ink-500">Time</dt>
-          <dd className="mt-1 text-base text-ink-900">
-            {timeFormatter.format(start)}–{timeFormatter.format(end)}
-          </dd>
-        </div>
-        <div>
-          <dt className="text-xs font-semibold uppercase tracking-[0.08em] text-ink-500">Venue</dt>
-          <dd className="mt-1 text-base text-ink-900">{event.venueName}</dd>
-        </div>
-        <div>
-          <dt className="text-xs font-semibold uppercase tracking-[0.08em] text-ink-500">Address</dt>
-          <dd className="mt-1 text-base text-ink-900">{event.venueAddress}</dd>
-        </div>
+    <div className="border-t border-ink-100">
+      <dl>
+        {rows.map((row) => (
+          <div
+            key={row.term}
+            className="grid gap-0.5 border-b border-ink-100 py-3.5 sm:grid-cols-[120px_minmax(0,1fr)] sm:gap-8"
+          >
+            <dt className="label text-ink-400">{row.term}</dt>
+            <dd className="text-base leading-[1.5] tracking-[-0.02em] text-ink-900">{row.value}</dd>
+          </div>
+        ))}
       </dl>
       {event.mapUrl ? (
         <a
           href={event.mapUrl}
           target="_blank"
           rel="noreferrer"
-          className="mt-6 inline-block text-sm font-semibold text-blue-500 hover:text-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+          className="label mt-5 inline-block text-blue-500 transition-colors duration-300 ease-out hover:text-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500"
         >
-          View the map
+          View the map →
         </a>
       ) : null}
     </div>

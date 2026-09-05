@@ -1,20 +1,66 @@
+import { Link } from 'react-router-dom';
+
 interface FooterProps {
   contactEmail: string;
+  sponsorEmail: string;
 }
 
-export function Footer({ contactEmail }: FooterProps) {
+const footerLinks = [
+  { to: '/students', label: 'For students' },
+  { to: '/sponsors', label: 'Partners' },
+  { to: '/team', label: 'Team' },
+  { to: '/schedule', label: 'Schedule' },
+  { to: '/blog', label: 'Blog' },
+];
+
+export function Footer({ contactEmail, sponsorEmail }: FooterProps) {
   const year = new Date().getFullYear();
 
   return (
     <footer className="border-t border-ink-100 bg-white">
-      <div className="mx-auto flex max-w-[1120px] flex-col gap-2 px-6 py-8 text-sm text-ink-500 md:flex-row md:items-center md:justify-between md:px-12">
-        <p>© {year} Yale Impact Exposition. All rights reserved.</p>
-        <a
-          href={`mailto:${contactEmail}`}
-          className="rounded-[var(--radius-control)] font-semibold text-blue-500 hover:text-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
-        >
-          {contactEmail}
-        </a>
+      <div className="mx-auto max-w-[1200px] px-6 py-10 md:px-10">
+        <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_auto]">
+          <div>
+            <p className="display-2 max-w-[14ch]">
+              Yale Impact <span className="accent-serif">Expo</span>
+            </p>
+            <p className="mt-4 max-w-[46ch] text-sm leading-[1.6] text-ink-500">
+              Build something serious, and earn access to the people who can advance it.
+            </p>
+          </div>
+          <nav aria-label="Footer">
+            <ul className="grid gap-1.5">
+              {footerLinks.map((link) => (
+                <li key={link.to}>
+                  <Link
+                    to={link.to}
+                    className="label text-ink-400 transition-colors duration-300 ease-out hover:text-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+
+        <div className="mt-10 flex flex-col gap-2 border-t border-ink-100 pt-5 md:flex-row md:items-center md:justify-between">
+          <p className="label text-ink-400">© {year} Yale Impact Expo</p>
+          <div className="flex flex-wrap gap-x-6 gap-y-1">
+            <a
+              href={`mailto:${contactEmail}`}
+              className="label text-ink-500 transition-colors duration-300 ease-out hover:text-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500"
+            >
+              {contactEmail}
+            </a>
+            <a
+              href={`mailto:${sponsorEmail}`}
+              className="label text-ink-500 transition-colors duration-300 ease-out hover:text-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500"
+            >
+              Partner with us
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
   );

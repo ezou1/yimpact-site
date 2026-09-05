@@ -1,4 +1,4 @@
-# Yale Impact Exposition — Build Spec
+# Yale Impact Expo — Build Spec
 
 ## 0. How to use this document
 
@@ -281,7 +281,7 @@ export interface EventDetails {
 
 Make this placeholder content:
 
-- `event.ts` — The name is real: `Yale Impact Exposition`. All other fields are
+- `event.ts` — The name is real: `Yale Impact Expo`. All other fields are
   placeholders. Use a clearly false future date. Set the venue to `TBD`. A
   reader must not think that this information is correct.
 - `sponsors.ts` — Make 24 sponsors. Use all six sectors. Use all three tiers.

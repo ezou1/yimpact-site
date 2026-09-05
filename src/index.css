@@ -4,8 +4,9 @@
   --color-ink-900: #0b1524;
   --color-ink-700: #334155;
   --color-ink-500: #64748b;
+  --color-ink-400: #94a3b8;
   --color-ink-300: #cbd5e1;
-  --color-ink-100: #e8edf4;
+  --color-ink-100: #e4e9f0;
   --color-ink-50: #f6f8fb;
 
   --color-blue-900: #00224a;
@@ -15,15 +16,83 @@
   --color-blue-50: #f0f5fc;
 
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Newsreader', ui-serif, Georgia, serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
 
-  --radius-card: 12px;
-  --radius-control: 8px;
+  /* Nothing on this site is rounded. The two names stay so that focus rings
+     and older call sites keep working. */
+  --radius-card: 0px;
+  --radius-control: 0px;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* The header is one non-wrapping row. Sticky rails below it use this. */
+  --header-h: 58px;
 }
 
 body {
   font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: -0.011em;
   background-color: #ffffff;
   color: var(--color-ink-700);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Display type is set tight. The larger it runs, the tighter it tracks. */
+.display-1 {
+  font-size: clamp(2.5rem, 6vw, 4.25rem);
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+  font-weight: 500;
+  color: var(--color-ink-900);
+}
+
+.display-2 {
+  font-size: clamp(1.75rem, 3.4vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.038em;
+  font-weight: 500;
+  color: var(--color-ink-900);
+}
+
+.display-3 {
+  font-size: 1.25rem;
+  line-height: 1.25;
+  letter-spacing: -0.028em;
+  font-weight: 500;
+  color: var(--color-ink-900);
+}
+
+/* The serif runs light and picks out one word inside a display heading. */
+.accent-serif {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* Every small label on the site is mono, uppercase and widely tracked. */
+.label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  line-height: 1.5;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.8s var(--ease-out-soft),
+    transform 0.8s var(--ease-out-soft);
+}
+
+.reveal[data-shown] {
+  opacity: 1;
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
