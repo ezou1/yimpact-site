@@ -54,9 +54,9 @@ export function Team() {
             </h1>
           </Reveal>
 
-          <div className="mt-10 grid gap-10 xl:grid-cols-[200px_minmax(0,1fr)] xl:gap-10">
-            <AdminPanel officers={adminOfficers} openId={openId} onToggle={toggle} />
-
+          {/* The Expo team comes first in reading order, so on a narrow screen the
+              officers fall below it; from xl they take the right-hand column. */}
+          <div className="mt-10 grid gap-10 xl:grid-cols-[minmax(0,1fr)_200px] xl:gap-10">
             <div>
               <div className="border-b border-bar/25 pb-3">
                 <h2 className="display-2">Expo team</h2>
@@ -101,6 +101,8 @@ export function Team() {
                 ))}
               </div>
             </div>
+
+            <AdminPanel officers={adminOfficers} openId={openId} onToggle={toggle} />
           </div>
         </div>
       </div>

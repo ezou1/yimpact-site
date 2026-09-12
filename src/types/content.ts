@@ -118,3 +118,10 @@ export interface EventDetails {
   contactEmail: string;
   sponsorEmail: string;
 }
+
+// One line on the Alumni page: a donor, an alumni-led company, or a Yale club.
+export interface AlumniEntry {
+  id: string;
+  name: string;
+  detail: string;
+}

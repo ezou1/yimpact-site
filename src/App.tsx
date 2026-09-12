@@ -5,6 +5,7 @@ import { Home } from './pages/Home';
 import { Sponsors } from './pages/Sponsors';
 import { SponsorDetail } from './pages/SponsorDetail';
 import { Students } from './pages/Students';
+import { Alumni } from './pages/Alumni';
 import { Team } from './pages/Team';
 import { Schedule } from './pages/Schedule';
 import { Blog } from './pages/Blog';
@@ -21,6 +22,7 @@ export function App() {
           <Route path="/" element={<Home />} />
           <Route path="/sponsors" element={<Sponsors />} />
           <Route path="/sponsors/:sponsorId" element={<SponsorDetail />} />
+          <Route path="/alumni" element={<Alumni />} />
           <Route path="/students" element={<Students />} />
           <Route path="/team" element={<Team />} />
           <Route path="/schedule" element={<Schedule />} />

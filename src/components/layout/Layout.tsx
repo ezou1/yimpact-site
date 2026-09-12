@@ -16,6 +16,7 @@ export type PatternKind =
   | 'partner'
   | 'login'
   | 'notfound'
+  | 'alumni'
   | 'none';
 
 const patternClass: Record<Exclude<PatternKind, 'none'>, string> = {
@@ -28,6 +29,7 @@ const patternClass: Record<Exclude<PatternKind, 'none'>, string> = {
   partner: 'pattern-partner',
   login: 'pattern-login',
   notfound: 'pattern-notfound',
+  alumni: 'pattern-alumni',
 };
 
 interface LayoutProps {
