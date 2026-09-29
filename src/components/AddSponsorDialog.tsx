@@ -1,32 +1,24 @@
 import { useRef, useState } from 'react';
 import type { FormEvent } from 'react';
-import type { Domain } from '../types/content';
 import { domainLabels } from '../content/sponsors';
 import type { Placement } from './SponsorField';
+import type { NewSponsor } from '../admin/sponsorStore';
 
 interface AddSponsorDialogProps {
   placement: Placement;
   onImpactChange: (impact: number) => void;
   onClose: () => void;
-  onAdd: (entry: { name: string; domain: Domain; impact: number; logoUrl: string; websiteUrl?: string }) => void;
+  onAdd: (entry: NewSponsor) => Promise<{ error: string | null }>;
 }
 
 const MAX_LOGO_BYTES = 400 * 1024;
-
-function readFileAsDataUrl(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(String(reader.result));
-    reader.onerror = () => reject(new Error('The logo could not be read.'));
-    reader.readAsDataURL(file);
-  });
-}
 
 // The domain and the size range both come from where the organizer dropped the
 // bubble. The slider cannot leave that range, which is what guarantees the
 // field keeps its "higher means larger" order.
 export function AddSponsorDialog({ placement, onImpactChange, onClose, onAdd }: AddSponsorDialogProps) {
   const [name, setName] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
   const [websiteUrl, setWebsiteUrl] = useState('');
   const [impact, setImpact] = useState(placement.impact);
   const [error, setError] = useState<string | null>(null);
@@ -57,19 +49,23 @@ export function AddSponsorDialog({ placement, onImpactChange, onClose, onAdd }: 
       return;
     }
 
-    try {
-      const logoUrl = await readFileAsDataUrl(file);
-      onAdd({
-        name: name.trim(),
-        domain: placement.domain,
-        impact,
-        logoUrl,
-        websiteUrl: websiteUrl.trim() || undefined,
-      });
-      onClose();
-    } catch {
-      setError('The logo could not be read. Try a different file.');
+    // Guard here rather than on the button. Enter submits without a click.
+    if (isSaving) return;
+    setIsSaving(true);
+    const result = await onAdd({
+      name: name.trim(),
+      domain: placement.domain,
+      impact,
+      logoFile: file,
+      websiteUrl: websiteUrl.trim() || undefined,
+    });
+    setIsSaving(false);
+
+    if (result.error) {
+      setError(result.error);
+      return;
     }
+    onClose();
   }
 
   return (
@@ -183,9 +179,10 @@ export function AddSponsorDialog({ placement, onImpactChange, onClose, onAdd }: 
           <div className="flex gap-2 pt-1">
             <button
               type="submit"
-              className="label flex-1 bg-blue-700 px-5 py-3 text-white transition-colors duration-300 ease-out hover:bg-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+              disabled={isSaving}
+              className="label flex-1 bg-blue-700 px-5 py-3 text-white transition-colors duration-300 ease-out hover:bg-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 disabled:cursor-not-allowed disabled:bg-bar/25 disabled:text-ink-500"
             >
-              Add partner
+              {isSaving ? 'Adding' : 'Add partner'}
             </button>
             <button
               type="button"
