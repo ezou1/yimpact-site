@@ -102,6 +102,8 @@ export interface BlogPost {
   body: string[]; // One string per paragraph.
   lead: boolean; // True for the story that leads The Impact Record.
   sponsorIds?: string[]; // Partners whose page also carries this story.
+  coverUrl?: string; // The image the announcements form uploads.
+  coverAlt?: string;
 }
 
 export interface EventDetails {

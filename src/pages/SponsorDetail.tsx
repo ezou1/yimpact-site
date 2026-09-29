@@ -4,7 +4,7 @@ import { Reveal } from '../components/ui/Reveal';
 import { PostCard } from '../components/PostList';
 import { buttonClassNames } from '../components/ui/Button';
 import { domainLabels } from '../content/sponsors';
-import { postsByDate } from '../content/blog';
+import { usePosts } from '../hooks/usePosts';
 import { useSponsors } from '../admin/sponsorStore';
 import { asset } from '../lib/asset';
 import { NotFound } from './NotFound';
@@ -19,13 +19,16 @@ const tierLabel: Record<SponsorTier, string> = {
 export function SponsorDetail() {
   const { sponsorId } = useParams();
   const { sponsors } = useSponsors();
+  const { posts } = usePosts();
   const sponsor = sponsors.find((entry) => entry.id === sponsorId);
 
   if (!sponsor) {
     return <NotFound />;
   }
 
-  const stories = postsByDate.filter((post) => post.sponsorIds?.includes(sponsor.id));
+  // The stories arrive after the first paint. The section below stays empty
+  // until then.
+  const stories = posts.filter((post) => post.sponsorIds?.includes(sponsor.id));
 
   return (
     <Layout
