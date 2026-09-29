@@ -4,6 +4,11 @@ import type { ProfileEdit, ProfileRow, UserRole } from '../types/db';
 
 export type AuthStatus = 'loading' | 'signedOut' | 'signedIn';
 
+// A signed-in account normally has one profile row. The row is missing when
+// the account was made before the signup trigger existed. The portal must say
+// so rather than wait for a row that never arrives.
+export type ProfileStatus = 'loading' | 'ready' | 'missing';
+
 export interface SignUpFields {
   fullName: string;
   school: string;
@@ -15,6 +20,7 @@ export interface AuthValue {
   status: AuthStatus;
   session: Session | null;
   profile: ProfileRow | null;
+  profileStatus: ProfileStatus;
   role: UserRole | null;
   // True for an admin, or for an approved student or sponsor. This mirrors
   // app.is_approved_member in the database, but it controls the interface

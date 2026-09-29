@@ -5,12 +5,13 @@ import { supabase } from '../lib/supabase';
 import { allowedDomainMessage, hasAllowedDomain } from '../lib/email';
 import type { ProfileEdit, ProfileRow } from '../types/db';
 import { AuthContext } from './context';
-import type { AuthStatus, AuthValue, SignUpFields } from './context';
+import type { AuthStatus, AuthValue, ProfileStatus, SignUpFields } from './context';
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [status, setStatus] = useState<AuthStatus>('loading');
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<ProfileRow | null>(null);
+  const [profileStatus, setProfileStatus] = useState<ProfileStatus>('loading');
 
   // The session effect. Do not await a Supabase call inside the callback.
   // The client holds a lock during that callback and an await deadlocks it.
@@ -41,10 +42,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!userId) {
       setProfile(null);
+      setProfileStatus('loading');
       return;
     }
 
     let ignore = false;
+    setProfileStatus('loading');
 
     supabase
       .from('profiles')
@@ -52,7 +55,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .eq('id', userId)
       .maybeSingle()
       .then(({ data }) => {
-        if (!ignore) setProfile((data as ProfileRow | null) ?? null);
+        if (ignore) return;
+        const row = (data as ProfileRow | null) ?? null;
+        setProfile(row);
+        setProfileStatus(row ? 'ready' : 'missing');
       });
 
     return () => {
@@ -70,7 +76,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .select('*')
       .eq('id', userId)
       .maybeSingle();
-    setProfile((data as ProfileRow | null) ?? null);
+    const row = (data as ProfileRow | null) ?? null;
+    setProfile(row);
+    setProfileStatus(row ? 'ready' : 'missing');
   }, [userId]);
 
   const signIn = useCallback(async (email: string, password: string) => {
@@ -136,6 +144,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       status,
       session,
       profile,
+      profileStatus,
       role,
       isApprovedMember: Boolean(isApprovedMember),
       signIn,
@@ -144,7 +153,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       saveProfile,
       refreshProfile,
     };
-  }, [status, session, profile, signIn, signUp, signOut, saveProfile, refreshProfile]);
+  }, [status, session, profile, profileStatus, signIn, signUp, signOut, saveProfile, refreshProfile]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
