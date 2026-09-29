@@ -29,7 +29,7 @@ export function PortalNav() {
   }
 
   return (
-    <div className="sticky top-[var(--header-h)] z-30 border-y border-ink-100 bg-white/90 backdrop-blur-md">
+    <div className="sticky top-[var(--header-h)] z-30 border-y border-bar/25 bg-white/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-[1200px] items-center gap-6 px-6 md:px-10">
         <nav aria-label="Portal" className="min-w-0 flex-1">
           <ul className="flex overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -41,7 +41,7 @@ export function PortalNav() {
                   className={({ isActive }) =>
                     `label block border-b-2 px-4 py-3.5 transition-colors duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-blue-500 ${
                       isActive
-                        ? 'border-ink-900 text-ink-900'
+                        ? 'border-bar text-ink-900'
                         : 'border-transparent text-ink-400 hover:text-ink-900'
                     }`
                   }

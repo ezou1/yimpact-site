@@ -35,8 +35,8 @@ export function ResourceTile({ resource, headingLevel }: ResourceTileProps) {
   const logoUrl = resource.org_slug ? logoBySlug.get(resource.org_slug) : undefined;
 
   return (
-    <div className="group flex h-full flex-col border border-ink-100 transition-colors duration-300 ease-out hover:border-ink-300">
-      <div className="flex items-center justify-between gap-3 border-b border-ink-100 p-4">
+    <div className="group flex h-full flex-col border border-bar/25 transition-colors duration-300 ease-out hover:border-bar/45">
+      <div className="flex items-center justify-between gap-3 border-b border-bar/25 p-4">
         {logoUrl ? (
           <img
             src={logoUrl}
@@ -135,10 +135,10 @@ function AccessDetails({ resource }: { resource: Resource }) {
   }
 
   return (
-    <div className="mt-4 border-t border-ink-100">
+    <div className="mt-4 border-t border-bar/25">
       <dl>
         {rows.map((row) => (
-          <div key={row.term} className="grid gap-0.5 border-b border-ink-100 py-2.5 sm:grid-cols-[72px_minmax(0,1fr)] sm:gap-4">
+          <div key={row.term} className="grid gap-0.5 border-b border-bar/25 py-2.5 sm:grid-cols-[72px_minmax(0,1fr)] sm:gap-4">
             <dt className="label text-ink-400">{row.term}</dt>
             <dd className="min-w-0 break-words text-sm leading-[1.5] text-ink-900">{row.value}</dd>
           </div>
@@ -152,7 +152,7 @@ function AccessDetails({ resource }: { resource: Resource }) {
 }
 
 const linkClass =
-  'break-all border-b border-ink-300 pb-0.5 transition-colors duration-300 ease-out hover:border-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500';
+  'break-all border-b border-bar/45 pb-0.5 transition-colors duration-300 ease-out hover:border-bar focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500';
 
 function MailLink({ address }: { address: string }) {
   return (

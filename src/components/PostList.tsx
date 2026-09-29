@@ -117,7 +117,7 @@ export function PostListSkeleton() {
         Loading stories
       </p>
       <div aria-hidden="true">
-        <div className="border-b border-ink-100 pb-10">
+        <div className="border-b border-bar/25 pb-10">
           <div className="h-3 w-24 bg-ink-50" />
           <div className="mt-4 h-8 w-full max-w-[24ch] bg-ink-50" />
           <div className="mt-3 h-8 w-full max-w-[18ch] bg-ink-50" />
@@ -126,7 +126,7 @@ export function PostListSkeleton() {
         </div>
         <ul className="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2">
           {[0, 1, 2, 3].map((index) => (
-            <li key={index} className="border-t border-ink-100 pt-4">
+            <li key={index} className="border-t border-bar/25 pt-4">
               <div className="h-3 w-20 bg-ink-50" />
               <div className="mt-3 h-5 w-full bg-ink-50" />
               <div className="mt-2 h-5 w-3/4 bg-ink-50" />

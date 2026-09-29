@@ -34,7 +34,7 @@ export function MessageThread({
 
   if (status === 'loading') {
     return (
-      <div className="border border-ink-100 p-4">
+      <div className="border border-bar/25 p-4">
         <PendingLabel>Loading messages</PendingLabel>
       </div>
     );
@@ -47,7 +47,7 @@ export function MessageThread({
       aria-live="polite"
       aria-relevant="additions"
       aria-label="Messages"
-      className="flex h-[420px] flex-col gap-3 overflow-y-auto border border-ink-100 p-4"
+      className="flex h-[420px] flex-col gap-3 overflow-y-auto border border-bar/25 p-4"
     >
       {messages.length === 0 ? (
         <li>
@@ -61,7 +61,7 @@ export function MessageThread({
           <li
             key={message.id}
             className={`max-w-[52ch] p-3 ${
-              isOwn ? 'ml-auto border border-ink-900 bg-white' : 'border border-ink-100 bg-ink-50'
+              isOwn ? 'ml-auto border border-bar bg-white' : 'border border-bar/25 bg-ink-50/70'
             }`}
           >
             <p className="label text-ink-400">

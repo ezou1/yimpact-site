@@ -61,100 +61,102 @@ export function Signup() {
         meta="Open to every Yale student, in every school and every year. Free to take part. You do not need a team, a prototype, or a prior connection to a lab."
       />
 
-      <div className="mx-auto max-w-[1200px] px-6 pb-24 md:px-10">
-        <Reveal>
-          <form action={submit} className="max-w-[520px] border border-ink-100 p-6">
-            <div className="grid gap-5">
-              <Field label="Full name">
-                {({ id }) => (
-                  <Input id={id} name="full_name" autoComplete="name" required />
-                )}
-              </Field>
-
-              <Field label="Yale email" hint="Use your yale.edu address.">
-                {({ id, describedBy }) => (
-                  <Input
-                    id={id}
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    aria-describedby={describedBy}
-                  />
-                )}
-              </Field>
-
-              <Field label="School" hint="Example: Yale College, or School of Management.">
-                {({ id, describedBy }) => (
-                  <Input id={id} name="school" aria-describedby={describedBy} />
-                )}
-              </Field>
-
-              <div className="grid gap-5 sm:grid-cols-2">
-                <Field label="Programme" hint="Example: Computer Science.">
-                  {({ id, describedBy }) => (
-                    <Input id={id} name="program" aria-describedby={describedBy} />
+      <div className="mx-auto max-w-[1200px] px-4 pb-8 sm:px-6 md:px-10">
+        <div className="haze px-5 py-8 sm:px-7 md:px-10 md:py-12">
+          <Reveal>
+            <form action={submit} className="max-w-[520px] border border-bar/25 p-6">
+              <div className="grid gap-5">
+                <Field label="Full name">
+                  {({ id }) => (
+                    <Input id={id} name="full_name" autoComplete="name" required />
                   )}
                 </Field>
 
-                <Field label="Graduation year">
-                  {({ id }) => (
+                <Field label="Yale email" hint="Use your yale.edu address.">
+                  {({ id, describedBy }) => (
                     <Input
                       id={id}
-                      name="grad_year"
-                      inputMode="numeric"
-                      pattern="[0-9]*"
-                      maxLength={4}
-                      placeholder="2028"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      required
+                      aria-describedby={describedBy}
                     />
                   )}
                 </Field>
+
+                <Field label="School" hint="Example: Yale College, or School of Management.">
+                  {({ id, describedBy }) => (
+                    <Input id={id} name="school" aria-describedby={describedBy} />
+                  )}
+                </Field>
+
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <Field label="Programme" hint="Example: Computer Science.">
+                    {({ id, describedBy }) => (
+                      <Input id={id} name="program" aria-describedby={describedBy} />
+                    )}
+                  </Field>
+
+                  <Field label="Graduation year">
+                    {({ id }) => (
+                      <Input
+                        id={id}
+                        name="grad_year"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
+                        maxLength={4}
+                        placeholder="2028"
+                      />
+                    )}
+                  </Field>
+                </div>
+
+                <Field label="Password" hint="Eight characters or more.">
+                  {({ id, describedBy }) => (
+                    <Input
+                      id={id}
+                      name="password"
+                      type="password"
+                      autoComplete="new-password"
+                      required
+                      aria-describedby={describedBy}
+                    />
+                  )}
+                </Field>
+
+                <Field label="Confirm password">
+                  {({ id }) => (
+                    <Input
+                      id={id}
+                      name="confirm"
+                      type="password"
+                      autoComplete="new-password"
+                      required
+                    />
+                  )}
+                </Field>
+
+                {state.error ? <ErrorNote>{state.error}</ErrorNote> : null}
+
+                <Button type="submit" isDisabled={isPending} className="w-full">
+                  {isPending ? 'Creating the account' : 'Create account'}
+                </Button>
               </div>
+            </form>
 
-              <Field label="Password" hint="Eight characters or more.">
-                {({ id, describedBy }) => (
-                  <Input
-                    id={id}
-                    name="password"
-                    type="password"
-                    autoComplete="new-password"
-                    required
-                    aria-describedby={describedBy}
-                  />
-                )}
-              </Field>
-
-              <Field label="Confirm password">
-                {({ id }) => (
-                  <Input
-                    id={id}
-                    name="confirm"
-                    type="password"
-                    autoComplete="new-password"
-                    required
-                  />
-                )}
-              </Field>
-
-              {state.error ? <ErrorNote>{state.error}</ErrorNote> : null}
-
-              <Button type="submit" isDisabled={isPending} className="w-full">
-                {isPending ? 'Creating the account' : 'Create account'}
-              </Button>
-            </div>
-          </form>
-
-          <p className="mt-6 max-w-[62ch] text-sm leading-[1.6] text-ink-500">
-            You can edit every field later in the portal. Already registered?{' '}
-            <Link
-              to="/login"
-              className="border-b border-ink-300 pb-0.5 text-ink-900 transition-colors duration-300 ease-out hover:border-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500"
-            >
-              Log in
-            </Link>
-            .
-          </p>
-        </Reveal>
+            <p className="mt-6 max-w-[62ch] text-sm leading-[1.6] text-ink-500">
+              You can edit every field later in the portal. Already registered?{' '}
+              <Link
+                to="/login"
+                className="border-b border-bar/45 pb-0.5 text-ink-900 transition-colors duration-300 ease-out hover:border-bar focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500"
+              >
+                Log in
+              </Link>
+              .
+            </p>
+          </Reveal>
+        </div>
       </div>
     </Layout>
   );

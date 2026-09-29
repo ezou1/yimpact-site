@@ -25,18 +25,20 @@ export function Messages() {
         meta="A direct line to the Expo team. Ask about registration, tracks, partner resources, or anything the FAQ does not answer."
       />
 
-      <div className="mx-auto max-w-[820px] px-6 pb-24 md:px-10">
-        {status === 'error' ? (
-          <ErrorNote className="mb-4">The messages did not load. Reload the page.</ErrorNote>
-        ) : null}
+      <div className="mx-auto max-w-[820px] px-4 pb-8 sm:px-6 md:px-10">
+        <div className="haze px-5 py-8 sm:px-7 md:px-10 md:py-12">
+          {status === 'error' ? (
+            <ErrorNote className="mb-4">The messages did not load. Reload the page.</ErrorNote>
+          ) : null}
 
-        <MessageThread
-          messages={messages}
-          status={status}
-          currentUserId={session?.user.id ?? null}
-          otherName="Expo team"
-        />
-        <MessageComposer onSend={send} isSending={isSending} />
+          <MessageThread
+            messages={messages}
+            status={status}
+            currentUserId={session?.user.id ?? null}
+            otherName="Expo team"
+          />
+          <MessageComposer onSend={send} isSending={isSending} />
+        </div>
       </div>
     </Layout>
   );

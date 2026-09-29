@@ -1,32 +1,23 @@
-import { useActionState, useState } from 'react';
-import type { FormEvent } from 'react';
+import { useActionState } from 'react';
 import { Link, Navigate, useLocation } from 'react-router-dom';
 import { Layout } from '../components/layout/Layout';
 import { PageHeader } from '../components/ui/PageHeader';
 import { Reveal } from '../components/ui/Reveal';
 import { Button } from '../components/ui/Button';
-import { buttonClassNames } from '../components/ui/Button';
 import { Field } from '../components/ui/Field';
 import { Input } from '../components/ui/Input';
 import { ErrorNote } from '../components/ui/Status';
 import { useAuth } from '../auth/useAuth';
 import { event } from '../content/event';
-import { useAdmin } from '../admin/AdminContext';
 
 interface LoginState {
   error: string | null;
 }
 
 export function Login() {
-  // The real account. Row Level Security answers to this one.
   const { status, signIn } = useAuth();
   const location = useLocation();
   const from = (location.state as { from?: string } | null)?.from;
-
-  // The older passcode gate. It drives the add-a-partner control only.
-  const { isAdmin, signIn: adminSignIn, signOut: adminSignOut } = useAdmin();
-  const [passcode, setPasscode] = useState('');
-  const [passcodeError, setPasscodeError] = useState<string | null>(null);
 
   const [state, submit, isPending] = useActionState<LoginState, FormData>(
     async (_previous, form) => {
@@ -41,16 +32,6 @@ export function Login() {
     },
     { error: null },
   );
-
-  function handlePasscodeSubmit(submitEvent: FormEvent) {
-    submitEvent.preventDefault();
-    if (adminSignIn(passcode)) {
-      setPasscode('');
-      setPasscodeError(null);
-    } else {
-      setPasscodeError('That passcode is not recognised.');
-    }
-  }
 
   // The role decides the destination. PortalIndex reads it and redirects.
   if (status === 'signedIn') {
@@ -118,7 +99,7 @@ export function Login() {
                 New here?{' '}
                 <Link
                   to="/signup"
-                  className="border-b border-ink-300 pb-0.5 text-ink-900 transition-colors duration-300 ease-out hover:border-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500"
+                  className="border-b border-bar/45 pb-0.5 text-ink-900 transition-colors duration-300 ease-out hover:border-bar focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500"
                 >
                   Register with your Yale email
                 </Link>
@@ -146,57 +127,14 @@ export function Login() {
             </div>
           </div>
 
-          {/* Organizer access. See src/admin/AdminContext.tsx — this is a local
-              demo gate, not authentication. */}
           <div className="haze-inner mt-6 border border-bar/25 p-6">
             <p className="label text-ink-400">03</p>
             <h2 className="display-3 mt-3">Organizers</h2>
-
-            {isAdmin ? (
-              <div className="mt-4">
-                <p className="text-sm leading-[1.6] text-ink-500">
-                  Signed in as an organizer. The Partners page now shows the add-a-partner control.
-                </p>
-                <div className="mt-5 flex flex-wrap gap-3">
-                  <Link to="/sponsors" className={buttonClassNames('primary')}>
-                    Go to Partners
-                  </Link>
-                  <button type="button" onClick={adminSignOut} className={buttonClassNames('secondary')}>
-                    Sign out
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <form onSubmit={handlePasscodeSubmit} className="mt-4 max-w-[420px]">
-                <p className="text-sm leading-[1.6] text-ink-500">
-                  Organizers sign in here to add partners to the field.
-                </p>
-                <label htmlFor="admin-passcode" className="label mt-5 block text-ink-400">
-                  Organizer passcode
-                </label>
-                <div className="mt-2 flex flex-wrap gap-2">
-                  <input
-                    id="admin-passcode"
-                    type="password"
-                    value={passcode}
-                    onChange={(changeEvent) => setPasscode(changeEvent.target.value)}
-                    className="min-w-0 flex-1 border border-bar/45 px-3 py-2.5 text-sm text-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-1 focus-visible:outline-blue-500"
-                  />
-                  <button type="submit" className={buttonClassNames('primary')}>
-                    Sign in
-                  </button>
-                </div>
-                {passcodeError ? (
-                  <p role="alert" className="mt-3 text-xs text-ink-900">
-                    {passcodeError}
-                  </p>
-                ) : null}
-                <p className="mt-4 text-xs leading-[1.55] text-ink-400">
-                  This gate runs in the browser and protects nothing. It exists so the team can try the
-                  add-a-partner flow before the backend exists.
-                </p>
-              </form>
-            )}
+            <p className="mt-4 max-w-[62ch] text-sm leading-[1.6] text-ink-500">
+              Organizers sign in with the form above. The team gives your account the organizer role,
+              and the Partners page then shows the add-a-partner control. There is no separate
+              passcode.
+            </p>
           </div>
 
           <p className="mt-6 max-w-[62ch] text-sm leading-[1.6] text-ink-500">

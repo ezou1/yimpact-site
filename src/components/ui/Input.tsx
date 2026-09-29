@@ -7,8 +7,8 @@ const base =
 // input makes Safari on iOS zoom when the reader taps it.
 export function controlClassNames(hasError = false): string {
   const border = hasError
-    ? 'border-ink-900'
-    : 'border-ink-300 hover:border-ink-500 focus:border-ink-900';
+    ? 'border-bar'
+    : 'border-bar/45 hover:border-bar/45 focus:border-bar';
   return `${base} ${border}`;
 }
 

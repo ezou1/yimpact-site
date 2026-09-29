@@ -55,12 +55,12 @@ export function SponsorPortal() {
           </p>
         )}
 
-        <div className="border-t border-ink-100">
+        <div className="border-t border-bar/25">
           <dl>
             {partnerFacts.map((fact) => (
               <div
                 key={fact.term}
-                className="grid gap-0.5 border-b border-ink-100 py-3.5 sm:grid-cols-[140px_minmax(0,1fr)] sm:gap-8"
+                className="grid gap-0.5 border-b border-bar/25 py-3.5 sm:grid-cols-[140px_minmax(0,1fr)] sm:gap-8"
               >
                 <dt className="label text-ink-400">{fact.term}</dt>
                 <dd className="text-base leading-[1.5] tracking-[-0.02em] text-ink-900">

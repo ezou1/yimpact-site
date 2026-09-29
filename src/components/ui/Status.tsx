@@ -22,7 +22,7 @@ export function ErrorNote({
   className?: string;
 }) {
   return (
-    <div className={`border-l-2 border-ink-900 bg-ink-50 p-4 ${className}`} role="alert">
+    <div className={`border-l-2 border-bar bg-ink-50/70 p-4 ${className}`} role="alert">
       <p className="label text-ink-900">{title}</p>
       <p className="mt-2 max-w-[62ch] text-sm leading-[1.6] text-ink-700">{children}</p>
     </div>

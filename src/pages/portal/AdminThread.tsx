@@ -40,84 +40,86 @@ export function AdminThread() {
         meta="Every student and partner writes to one shared queue. Open a conversation to answer it."
       />
 
-      <div className="mx-auto max-w-[1200px] px-6 pb-24 md:px-10">
-        <div className="grid gap-8 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-10">
-          <aside aria-labelledby="inbox-heading" className="lg:sticky lg:top-32 lg:self-start">
-            <div className="border border-ink-100">
-              <div className="border-b border-ink-100 bg-ink-50 px-4 py-3">
-                <h2 id="inbox-heading" className="label text-ink-900">
-                  Conversations
-                </h2>
-              </div>
-
-              {listStatus === 'loading' ? (
-                <div className="p-4">
-                  <PendingLabel />
-                </div>
-              ) : null}
-
-              {listStatus === 'error' ? (
-                <div className="p-4">
-                  <EmptyNote>The inbox did not load.</EmptyNote>
-                </div>
-              ) : null}
-
-              {listStatus === 'ready' && entries.length === 0 ? (
-                <div className="p-4">
-                  <EmptyNote>Nobody has written yet.</EmptyNote>
-                </div>
-              ) : null}
-
-              <ul>
-                {entries.map((entry) => {
-                  const isOpen = entry.id === conversationId;
-                  return (
-                    <li key={entry.id} className="border-b border-ink-100 last:border-b-0">
-                      <Link
-                        to={`/portal/admin/messages/${entry.id}`}
-                        aria-current={isOpen ? 'true' : undefined}
-                        className={`block p-4 transition-colors duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-blue-500 ${
-                          isOpen ? 'bg-ink-50' : 'hover:bg-ink-50'
-                        }`}
-                      >
-                        <p className="text-sm font-medium leading-[1.3] tracking-[-0.025em] text-ink-900">
-                          {entry.memberName}
-                        </p>
-                        <p className="label mt-1 text-blue-500">{entry.memberRole}</p>
-                        <p className="mt-1 font-mono text-[11px] text-ink-400">
-                          {dateFormatter.format(new Date(entry.last_message_at))}
-                        </p>
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          </aside>
-
-          <div>
-            {!conversationId ? (
-              <EmptyNote>Select a conversation on the left.</EmptyNote>
-            ) : (
-              <>
-                <div className="mb-4 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-ink-100 pb-3">
-                  <h2 className="display-3">{open?.memberName ?? 'Conversation'}</h2>
-                  <p className="label text-ink-400">{open?.memberEmail}</p>
+      <div className="mx-auto max-w-[1200px] px-4 pb-8 sm:px-6 md:px-10">
+        <div className="haze px-5 py-8 sm:px-7 md:px-10 md:py-12">
+          <div className="grid gap-8 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-10">
+            <aside aria-labelledby="inbox-heading" className="lg:sticky lg:top-32 lg:self-start">
+              <div className="border border-bar/25">
+                <div className="border-b border-bar/25 bg-ink-50/70 px-4 py-3">
+                  <h2 id="inbox-heading" className="label text-ink-900">
+                    Conversations
+                  </h2>
                 </div>
 
-                {status === 'error' ? (
-                  <ErrorNote className="mb-4">The thread did not load.</ErrorNote>
+                {listStatus === 'loading' ? (
+                  <div className="p-4">
+                    <PendingLabel />
+                  </div>
                 ) : null}
 
-                <MessageThread
-                  messages={messages}
-                  status={status}
-                  currentUserId={session?.user.id ?? null}
-                  otherName={open?.memberName ?? 'Member'}
-                />
-                <MessageComposer onSend={send} isSending={isSending} />
-              </>
-            )}
+                {listStatus === 'error' ? (
+                  <div className="p-4">
+                    <EmptyNote>The inbox did not load.</EmptyNote>
+                  </div>
+                ) : null}
+
+                {listStatus === 'ready' && entries.length === 0 ? (
+                  <div className="p-4">
+                    <EmptyNote>Nobody has written yet.</EmptyNote>
+                  </div>
+                ) : null}
+
+                <ul>
+                  {entries.map((entry) => {
+                    const isOpen = entry.id === conversationId;
+                    return (
+                      <li key={entry.id} className="border-b border-bar/25 last:border-b-0">
+                        <Link
+                          to={`/portal/admin/messages/${entry.id}`}
+                          aria-current={isOpen ? 'true' : undefined}
+                          className={`block p-4 transition-colors duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-blue-500 ${
+                            isOpen ? 'bg-ink-50/70' : 'hover:bg-ink-50/70'
+                          }`}
+                        >
+                          <p className="text-sm font-medium leading-[1.3] tracking-[-0.025em] text-ink-900">
+                            {entry.memberName}
+                          </p>
+                          <p className="label mt-1 text-blue-500">{entry.memberRole}</p>
+                          <p className="mt-1 font-mono text-[11px] text-ink-400">
+                            {dateFormatter.format(new Date(entry.last_message_at))}
+                          </p>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </aside>
+
+            <div>
+              {!conversationId ? (
+                <EmptyNote>Select a conversation on the left.</EmptyNote>
+              ) : (
+                <>
+                  <div className="mb-4 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-bar/25 pb-3">
+                    <h2 className="display-3">{open?.memberName ?? 'Conversation'}</h2>
+                    <p className="label text-ink-400">{open?.memberEmail}</p>
+                  </div>
+
+                  {status === 'error' ? (
+                    <ErrorNote className="mb-4">The thread did not load.</ErrorNote>
+                  ) : null}
+
+                  <MessageThread
+                    messages={messages}
+                    status={status}
+                    currentUserId={session?.user.id ?? null}
+                    otherName={open?.memberName ?? 'Member'}
+                  />
+                  <MessageComposer onSend={send} isSending={isSending} />
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>

@@ -112,76 +112,78 @@ export function AnnouncementForm() {
         meta="The story appears on the blog straight away. Leave a blank line between paragraphs."
       />
 
-      <div className="mx-auto max-w-[1200px] px-6 pb-24 md:px-10">
-        <form action={submit} className="max-w-[680px] border border-ink-100 p-6">
-          <div className="grid gap-5">
-            <Field label="Title">
-              {({ id }) => <Input id={id} name="title" required />}
-            </Field>
+      <div className="mx-auto max-w-[1200px] px-4 pb-8 sm:px-6 md:px-10">
+        <div className="haze px-5 py-8 sm:px-7 md:px-10 md:py-12">
+          <form action={submit} className="max-w-[680px] border border-bar/25 p-6">
+            <div className="grid gap-5">
+              <Field label="Title">
+                {({ id }) => <Input id={id} name="title" required />}
+              </Field>
 
-            <div className="grid gap-5 sm:grid-cols-2">
-              <Field label="Your name">
-                {({ id }) => (
-                  <Input
+              <div className="grid gap-5 sm:grid-cols-2">
+                <Field label="Your name">
+                  {({ id }) => (
+                    <Input
+                      id={id}
+                      name="author"
+                      required
+                      defaultValue={profile?.full_name ?? ''}
+                    />
+                  )}
+                </Field>
+
+                <Field label="Section">
+                  {({ id }) => (
+                    <Select id={id} name="category" defaultValue="Announcements">
+                      {categories.map((category) => (
+                        <option key={category} value={category}>
+                          {category}
+                        </option>
+                      ))}
+                    </Select>
+                  )}
+                </Field>
+              </div>
+
+              <Field label="Image" hint="One image for the tile. JPEG, PNG, WebP, or AVIF, up to 5 MB.">
+                {({ id, describedBy }) => (
+                  <input
                     id={id}
-                    name="author"
-                    required
-                    defaultValue={profile?.full_name ?? ''}
+                    name="cover"
+                    type="file"
+                    accept={allowedTypes.join(',')}
+                    aria-describedby={describedBy}
+                    className="w-full border border-bar/45 bg-white p-2.5 text-sm text-ink-700 file:mr-3 file:border file:border-bar/45 file:bg-ink-50/70 file:px-3 file:py-1.5 file:text-xs file:text-ink-900 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-blue-500"
                   />
                 )}
               </Field>
 
-              <Field label="Section">
-                {({ id }) => (
-                  <Select id={id} name="category" defaultValue="Announcements">
-                    {categories.map((category) => (
-                      <option key={category} value={category}>
-                        {category}
-                      </option>
-                    ))}
-                  </Select>
+              <Field
+                label="Image description"
+                hint="What the image shows. A reader with a screen reader needs this."
+              >
+                {({ id, describedBy }) => (
+                  <Input id={id} name="cover_alt" aria-describedby={describedBy} />
                 )}
               </Field>
+
+              <Field label="Story" hint="Leave a blank line between paragraphs.">
+                {({ id, describedBy }) => (
+                  <Textarea id={id} name="body_text" rows={14} required aria-describedby={describedBy} />
+                )}
+              </Field>
+
+              {state.error ? <ErrorNote>{state.error}</ErrorNote> : null}
+              {isUploading ? <PendingLabel>Uploading the image</PendingLabel> : null}
+
+              <div>
+                <Button type="submit" isDisabled={isPending}>
+                  {isPending ? 'Publishing' : 'Publish'}
+                </Button>
+              </div>
             </div>
-
-            <Field label="Image" hint="One image for the tile. JPEG, PNG, WebP, or AVIF, up to 5 MB.">
-              {({ id, describedBy }) => (
-                <input
-                  id={id}
-                  name="cover"
-                  type="file"
-                  accept={allowedTypes.join(',')}
-                  aria-describedby={describedBy}
-                  className="w-full border border-ink-300 bg-white p-2.5 text-sm text-ink-700 file:mr-3 file:border file:border-ink-300 file:bg-ink-50 file:px-3 file:py-1.5 file:text-xs file:text-ink-900 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-blue-500"
-                />
-              )}
-            </Field>
-
-            <Field
-              label="Image description"
-              hint="What the image shows. A reader with a screen reader needs this."
-            >
-              {({ id, describedBy }) => (
-                <Input id={id} name="cover_alt" aria-describedby={describedBy} />
-              )}
-            </Field>
-
-            <Field label="Story" hint="Leave a blank line between paragraphs.">
-              {({ id, describedBy }) => (
-                <Textarea id={id} name="body_text" rows={14} required aria-describedby={describedBy} />
-              )}
-            </Field>
-
-            {state.error ? <ErrorNote>{state.error}</ErrorNote> : null}
-            {isUploading ? <PendingLabel>Uploading the image</PendingLabel> : null}
-
-            <div>
-              <Button type="submit" isDisabled={isPending}>
-                {isPending ? 'Publishing' : 'Publish'}
-              </Button>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </Layout>
   );
