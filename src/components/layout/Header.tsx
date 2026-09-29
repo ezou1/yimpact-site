@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 const navItems = [
   { to: '/sponsors', label: 'Partners' },
+  { to: '/alumni', label: 'Alumni' },
   { to: '/students', label: 'Students' },
   { to: '/team', label: 'Team' },
   { to: '/schedule', label: 'Schedule' },

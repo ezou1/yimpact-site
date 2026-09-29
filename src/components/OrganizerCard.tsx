@@ -1,4 +1,5 @@
 import type { Organizer } from '../types/content';
+import { asset } from '../lib/asset';
 
 interface OrganizerCardProps {
   organizer: Organizer;
@@ -23,7 +24,7 @@ export function OrganizerCard({ organizer, size = 'md' }: OrganizerCardProps) {
       }`}
     >
       <img
-        src={organizer.headshotUrl}
+        src={asset(organizer.headshotUrl)}
         alt={organizer.name}
         width={320}
         height={320}

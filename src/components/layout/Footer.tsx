@@ -8,6 +8,7 @@ interface FooterProps {
 const footerLinks = [
   { to: '/students', label: 'For students' },
   { to: '/sponsors', label: 'Partners' },
+  { to: '/alumni', label: 'Alumni' },
   { to: '/team', label: 'Team' },
   { to: '/schedule', label: 'Schedule' },
   { to: '/blog', label: 'The Record' },

@@ -66,6 +66,17 @@ export const organizers: Organizer[] = [
     email: 'programs@yaleimpactexpo.org',
   },
   {
+    id: 'eric-zhou',
+    name: 'Eric Zhou',
+    role: 'Tech Lead',
+    rank: 'executive',
+    affiliation: "Yale '27, Computer Science",
+    headshotUrl: '/headshots/eric-zhou.svg',
+    bio: 'Eric builds and maintains the Expo platform — the submission pipeline, the partner field, and the tooling teams rely on through the semester.',
+    linkedinUrl: 'https://www.linkedin.com/in/eric-zhou',
+    email: 'engineering@yaleimpactexpo.org',
+  },
+  {
     id: 'omar-haddad',
     name: 'Omar Haddad',
     role: 'Executive Director, Partnerships',
