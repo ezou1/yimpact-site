@@ -1,88 +1,111 @@
+import { useState } from 'react';
 import { Layout } from '../components/layout/Layout';
-import { PageHeader } from '../components/ui/PageHeader';
 import { Reveal } from '../components/ui/Reveal';
-import { OrganizerCard } from '../components/OrganizerCard';
+import { MemberChip, MemberPanel } from '../components/MemberTile';
+import type { Member } from '../components/MemberTile';
 import { AdminPanel } from '../components/AdminPanel';
 import { adminOfficers, organizers } from '../content/organizers';
 
+// Members fill a row up to this many, then a new row is spawned. Every row is
+// centred, so the group stays symmetric however many people are in it.
+const PER_ROW = 3;
+
+function intoRows(members: Member[]): Member[][] {
+  const rows: Member[][] = [];
+  for (let index = 0; index < members.length; index += PER_ROW) {
+    rows.push(members.slice(index, index + PER_ROW));
+  }
+  return rows;
+}
+
 export function Team() {
+  const [openId, setOpenId] = useState<string | null>(null);
+
   const chair = organizers.filter((organizer) => organizer.rank === 'chair');
   const executive = organizers.filter((organizer) => organizer.rank === 'executive');
-  const team = organizers.filter((organizer) => organizer.rank === 'team');
+  const leads = organizers.filter((organizer) => organizer.rank === 'team');
+
+  const groups: { key: string; label: string; note: string; members: Member[] }[] = [
+    { key: 'chair', label: 'Chair', note: 'Sets direction and answers for the programme', members: chair },
+    {
+      key: 'executive',
+      label: 'Executive council',
+      note: 'Reports to the chair. Each director owns one half of the programme',
+      members: executive,
+    },
+    { key: 'leads', label: 'Leads', note: 'Reports to the council. Runs the day-to-day work', members: leads },
+  ];
+
+  function toggle(id: string) {
+    setOpenId((current) => (current === id ? null : id));
+  }
 
   return (
     <Layout
+      pattern="team"
       title="Team · Yale Impact Expo"
       description="The students who run the Yale Impact Expo, and the officers of the organization behind it."
     >
-      <PageHeader
-        eyebrow={`${adminOfficers.length + organizers.length} students`}
-        title="Team"
-        meta="The Expo runs in three ranks under a chair, with the officers of the organization holding the budget and the mandate."
-      />
+      <div className="mx-auto max-w-[1200px] px-4 py-6 sm:px-6 md:px-10 md:py-10">
+        <div className="haze px-5 py-8 sm:px-7 md:px-10 md:py-12">
+          <Reveal>
+            <h1 className="display-2">
+              The Impact Expo <span className="accent-serif">Team</span>
+            </h1>
+          </Reveal>
 
-      <div className="mx-auto max-w-[1200px] px-6 pb-20 md:px-10">
-        <div className="grid gap-10 lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-12">
-          <AdminPanel officers={adminOfficers} />
+          {/* The Expo team comes first in reading order, so on a narrow screen the
+              officers fall below it; from xl they take the right-hand column. */}
+          <div className="mt-10 grid gap-10 xl:grid-cols-[minmax(0,1fr)_200px] xl:gap-10">
+            <div>
+              <div className="border-b border-bar/25 pb-3">
+                <h2 className="display-2">Expo team</h2>
+              </div>
 
-          <div className="space-y-12">
-            <Reveal>
-              <TierHeading index="01" title="Chair" note="Sets direction and answers for the programme." />
-              <ul className="mt-5 grid gap-4">
-                {chair.map((organizer) => (
-                  <li key={organizer.id}>
-                    <OrganizerCard organizer={organizer} size="lg" />
-                  </li>
+              <div className="mt-8 space-y-8">
+                {groups.map((group, groupIndex) => (
+                  <Reveal key={group.key}>
+                    <section aria-labelledby={`rank-${group.key}`}>
+                      <p id={`rank-${group.key}`} className="label text-center text-ink-400">
+                        <span className="text-blue-500">{String(groupIndex + 1).padStart(2, '0')}</span>
+                        <span className="px-2 text-ink-300">/</span>
+                        {group.label}
+                      </p>
+                      <p className="mt-1.5 text-center text-xs text-ink-400">{group.note}</p>
+
+                      <div className="mt-4 space-y-4">
+                        {intoRows(group.members).map((row, rowIndex) => {
+                          const openMember = row.find((member) => member.id === openId);
+                          const panelId = `member-panel-${group.key}-${rowIndex}`;
+                          return (
+                            <div key={panelId}>
+                              <ul className="flex flex-wrap justify-center gap-4">
+                                {row.map((member) => (
+                                  <li key={member.id}>
+                                    <MemberChip
+                                      member={member}
+                                      isOpen={openId === member.id}
+                                      onToggle={() => toggle(member.id)}
+                                      panelId={panelId}
+                                    />
+                                  </li>
+                                ))}
+                              </ul>
+                              {openMember ? <MemberPanel member={openMember} id={panelId} /> : null}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </section>
+                  </Reveal>
                 ))}
-              </ul>
-            </Reveal>
+              </div>
+            </div>
 
-            <Reveal>
-              <TierHeading
-                index="02"
-                title="Executive council"
-                note="Reports to the chair. Each director owns one half of the programme."
-              />
-              <ul className="mt-5 grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-4">
-                {executive.map((organizer) => (
-                  <li key={organizer.id}>
-                    <OrganizerCard organizer={organizer} />
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-
-            <Reveal>
-              <TierHeading index="03" title="Leads" note="Reports to the council. Runs the day-to-day work." />
-              <ul className="mt-5 grid grid-cols-[repeat(auto-fill,minmax(190px,1fr))] gap-4">
-                {team.map((organizer) => (
-                  <li key={organizer.id}>
-                    <OrganizerCard organizer={organizer} size="sm" />
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
+            <AdminPanel officers={adminOfficers} openId={openId} onToggle={toggle} />
           </div>
         </div>
       </div>
     </Layout>
-  );
-}
-
-interface TierHeadingProps {
-  index: string;
-  title: string;
-  note: string;
-}
-
-function TierHeading({ index, title, note }: TierHeadingProps) {
-  return (
-    <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-ink-100 pb-3">
-      <h2 className="display-2">
-        <span className="label mr-3 align-middle text-blue-500">{index}</span>
-        {title}
-      </h2>
-      <p className="label text-ink-400">{note}</p>
-    </div>
   );
 }

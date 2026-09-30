@@ -1,4 +1,5 @@
 import type { Sponsor } from '../types/content';
+import { asset } from '../lib/asset';
 
 interface SponsorLogoGridProps {
   sponsors: Sponsor[];
@@ -8,11 +9,11 @@ interface SponsorLogoGridProps {
 // cells carry the structure.
 export function SponsorLogoGrid({ sponsors }: SponsorLogoGridProps) {
   return (
-    <ul className="grid grid-cols-2 gap-px border border-ink-100 bg-ink-100 sm:grid-cols-3 lg:grid-cols-5">
+    <ul className="haze-inner grid grid-cols-2 gap-px overflow-hidden border border-bar/25 bg-bar/25 sm:grid-cols-3 lg:grid-cols-5">
       {sponsors.map((sponsor) => {
         const logo = (
           <img
-            src={sponsor.logoUrl}
+            src={asset(sponsor.logoUrl)}
             alt={sponsor.name}
             width={48}
             height={48}

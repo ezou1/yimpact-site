@@ -21,7 +21,7 @@ export function ScheduleTable({ items }: ScheduleTableProps) {
       <table className="w-full min-w-[640px] border-collapse text-left">
         <caption className="sr-only">The Saturday agenda for the Yale Impact Expo</caption>
         <thead>
-          <tr className="border-y border-ink-100">
+          <tr className="border-y border-bar/25">
             <th scope="col" className="label py-3 pr-6 font-medium text-ink-400">
               Time
             </th>
@@ -40,7 +40,7 @@ export function ScheduleTable({ items }: ScheduleTableProps) {
           {sortedItems.map((item) => (
             <tr
               key={item.id}
-              className="border-b border-ink-100 align-top transition-colors duration-300 ease-out hover:bg-ink-50"
+              className="border-b border-bar/25 align-top transition-colors duration-300 ease-out hover:bg-ink-50"
             >
               <td className="whitespace-nowrap py-4 pr-6 font-mono text-xs tracking-[0.02em] text-ink-500">
                 {formatTime(item.startsAt)}–{formatTime(item.endsAt)}

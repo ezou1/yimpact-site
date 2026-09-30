@@ -10,7 +10,7 @@ export function Badge({ id, children, className = '' }: BadgeProps) {
   return (
     <span
       id={id}
-      className={`label inline-flex items-center border border-ink-100 px-2.5 py-1.5 text-ink-500 ${className}`}
+      className={`haze-inner label inline-flex items-center border border-bar/25 px-2.5 py-1.5 text-ink-500 ${className}`}
     >
       {children}
     </span>
